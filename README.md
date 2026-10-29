@@ -1,71 +1,133 @@
 # MATi-MoTE (MATi)
 
-A universal TV remote that runs as a Progressive Web App on iPhone and Android — no desktop bridge, no app store. Hosted as static files on GitHub Pages.
+A universal remote for TVs, streaming boxes and speakers that runs as a Progressive Web App on iPhone and Android — no app store. Hosted as static files on GitHub Pages.
 
 ## Files
 
 | File | What it is |
 |---|---|
-| `index.html` | The whole app: UI, Tailwind CSS (compiled and inlined), and all TV drivers |
+| `index.html` | The whole app: UI, Tailwind CSS (compiled and inlined), and all device drivers |
 | `manifest.json` | PWA manifest (name, icons, standalone display) |
-| `sw.js` | Service worker: offline app shell; never touches TV traffic |
+| `sw.js` | Service worker: always fetches the newest files, keeps an offline copy; never touches device traffic |
+| `version.json` | Build number. Installed copies compare against it and update themselves |
 | `icons/` | App, maskable, Apple touch and favicon icons (mint) |
-| `favicon.ico` | Browser-tab icon (16/32/48px) for browsers that look for an .ico |
+| `favicon.ico` | Browser-tab icon (16/32/48px) |
 | `icons/apps/` | Optional: drop official app logos here (see its README) |
 | `.nojekyll` | Tells GitHub Pages to serve files as-is |
-| `build.sh`, `tailwind/` | Only needed if you change Tailwind classes (see below) |
+| `build.sh`, `tailwind/` | Rebuilds CSS and stamps a new build number (see below) |
 
 ## Deploy to GitHub Pages
 
-1. Create a repo (e.g. `mati-mote`) and push these files to the root of `main`.
+1. Create a repo (e.g. `mati-mote`) and upload these files to the root of `main`.
 2. Repo **Settings → Pages → Build and deployment → Deploy from a branch → `main` / root**.
 3. Open `https://<you>.github.io/mati-mote/` on your phone.
-4. Install: **iPhone** — Safari → Share → *Add to Home Screen*. **Android** — Chrome menu → *Install app* (or Settings → Install MATi inside the app).
+4. Install: **iPhone** — Safari → Share → *Add to Home Screen*. **Android** — Chrome menu → *Install app*.
 
-All paths are relative, so it works from a project sub-path. When you ship changes, bump `VERSION` in `sw.js` so installed copies update.
+## Updates (automatic)
 
-## What actually works where (read this)
+Every release has a build number in `version.json` (and the same number inside `index.html`). After you upload new files to GitHub:
 
-Browsers deliberately limit what an HTTPS page can do on your home network, so support depends on TV brand **and** phone browser:
+- Open copies notice within seconds of being opened or brought back to the front (and every 15 minutes), show "Updating MATi…", and reload. GitHub's CDN can take a couple of minutes to serve the new files.
+- The service worker always asks GitHub for the newest files first, so a stale cached copy is only used when the phone is offline.
+- **Home-screen icon:** Android Chrome refreshes an installed app's icon by itself (it can take up to a day, and Chrome may ask you to confirm). **iPhone never updates an icon after it's added** — to get a new icon there, delete MATi from the home screen and add it again.
 
-| TV | Android · Chrome 142+ | iPhone · Safari / any iOS browser |
-|---|---|---|
-| **Roku** (ECP, HTTP :8060) | ✅ Works. Chrome's *Local Network Access* lets an HTTPS page call a private IP with `fetch(url, { targetAddressSpace: 'local' })` after you tap **Allow**. | ❌ Not possible. iOS blocks HTTP requests from HTTPS pages, Roku only speaks HTTP, and GitHub Pages is HTTPS-only. |
-| **Samsung Tizen 2016+** (WSS :8002) | ✅ After a one-time **Trust TV certificate** step, then approve MATi on the TV. | ⚠️ Best effort. Same trust step; Safari doesn't always reuse the certificate exception for WebSockets. |
-| **LG webOS** (WSS :3001) | ✅ After **Trust TV certificate**, accept the pairing prompt on the TV. | ⚠️ Best effort, same caveat. |
+**If you change files yourself**, run `./build.sh` before uploading so the build number changes (or edit the number by hand in `version.json`, `index.html` → `const BUILD`, `sw.js` → `VERSION`, and the `?v=` values in `manifest.json` and `index.html`). If the number doesn't change, installed copies won't know there's an update.
 
-Why not WebRTC or WebTransport? Both need software on the *other* end — a WebRTC peer or an HTTP/3 server. TVs don't run either for remote control, so neither can reach a TV without a bridge.
+## Supported devices
 
-Also not possible from any browser: turning a Samsung/LG TV **on** (needs Wake-on-LAN UDP packets), true network discovery via SSDP/mDNS, Android/Google TV (TLS client-certificate pairing), Fire TV (ADB) and Sony (requires a custom header on plain HTTP).
+Pick the **Type** first; MATi then shows only the platforms that fit it.
 
-### Discovery
-- **Chrome 142+:** *Scan Wi-Fi for TVs* probes `x.x.x.1–254` on Roku 8060, Samsung 8001 and LG 3000 and offers to add what it finds.
-- **Everywhere else:** enter the TV's IP (TV Settings → Network → Network status). Tip: give the TV a fixed IP / DHCP reservation in your router.
+| Type | Platforms |
+|---|---|
+| TV | Samsung Tizen · LG webOS · Roku OS · Android TV / Google TV* · Fire TV* · IR bridge* |
+| Streaming box / stick | Roku OS · Android TV / Google TV* · Fire TV* |
+| Speaker | Spotify Connect · Sonos · Bose SoundTouch |
+| Soundbar | Sonos · Bose SoundTouch · Spotify Connect · IR bridge* |
+| AV receiver | Denon / Marantz · Yamaha MusicCast · Spotify Connect · IR bridge* |
+| DVD / Blu-ray, Cable box | IR bridge* |
 
-### TV-side settings
+\* **Needs MATi Bridge.** Android TV, Google TV and Fire TV are controlled with ADB (raw TCP on port 5555 with key pairing). Broadlink RM4 and Global Caché IR hubs accept only raw UDP/TCP packets. **No web browser, on any phone, can open raw TCP/UDP connections**, so a web app can't reach these on its own. They're listed so users can see them, but can't be saved until a bridge exists.
+
+### What works where
+
+| Platform | How MATi talks to it | Android · Chrome 142+ | iPhone |
+|---|---|---|---|
+| Samsung Tizen 2016+ | Secure WebSocket :8002 (SmartView remote protocol) | ✅ after one-time *Trust certificate* | ⚠️ best effort (Safari may not reuse the certificate exception) |
+| LG webOS | Secure WebSocket :3001 (SSAP) | ✅ after *Trust certificate* | ⚠️ best effort |
+| Roku OS | HTTP :8060 (ECP) | ✅ via Local Network Access | ❌ iOS blocks HTTP from HTTPS pages |
+| Bose SoundTouch | HTTP :8090 local API | ✅ | ❌ (use Spotify Connect) |
+| Denon / Marantz AVR | HTTP control (port 8080 / 80) | ✅ | ❌ |
+| Yamaha MusicCast | HTTP Yamaha Extended Control | ✅ | ❌ |
+| Spotify Connect / Sonos | Official Spotify Web API (cloud) | ✅ | ✅ |
+
+Sonos is controlled through Spotify Connect because Sonos's own local API (UPnP/SOAP) needs request headers browsers won't send. Newer Bose Smart Speakers (not SoundTouch) have no public local API — use Spotify Connect for those too.
+
+Also not possible from any browser: turning Samsung/LG TVs **on** (Wake-on-LAN UDP), SSDP/mDNS discovery, Onkyo/Pioneer receivers (raw TCP).
+
+## Typing & search — how it works (and why)
+
+TV apps accept text in two different ways, so MATi has two tabs under **Type & search**:
+
+**1. Type on TV** — for text boxes that use the TV's *own* keyboard: Roku search and Roku's keyboard, the LG/Samsung system keyboard (TV browser, settings, and apps that use it). Each key goes straight to the TV.
+- **LG and Samsung** tell MATi when one of those text boxes is open, so the tab shows a green "text box is open — type away" or tells you to select one first.
+- **Roku** can't report that, so MATi explains where typing works. It also offers **Search all of Roku**, which runs Roku's own search across channels.
+
+**2. YouTube** — YouTube, Netflix, Prime Video and Disney+ draw their *own* keyboards on every TV brand and ignore text sent from outside. Roku, LG and Samsung remote apps can't type into them either. So for YouTube, MATi searches on the phone and opens the chosen video directly on the TV:
+- Roku: `POST /launch/837?contentId=<id>&mediaType=movie`
+- LG: `ssap://system.launcher/launch` with `{ id: "youtube.leanback.v4", contentId: "v=<id>" }`
+- Samsung: DIAL (`POST :8080/ws/apps/YouTube`, body `v=<id>`) in Chrome on Android, otherwise `ed.apps.launch` with `metaTag: "v=<id>"`. The Samsung route can vary by model.
+
+Ways to pick a video:
+- **Paste a link** (always works, no setup): in the YouTube phone app tap *Share › Copy link*, then paste into MATi.
+- **Share to MATi** (Android): YouTube app › *Share* › **MATi** opens MATi with the video ready to play. iPhone doesn't let web apps appear in the share sheet.
+- **Search inside MATi** (needs a YouTube API key, see below), by typing or by voice.
+
+When the TV is showing YouTube (LG reports this; on other TVs, when MATi opened YouTube last), the keyboard and mic go to the YouTube tab automatically.
+
+Netflix, Prime Video and Disney+ have no public way to search or open a title from outside, so there's no reliable fix for typing into them. Use the D-pad on their on-screen keyboard, or *Search all of Roku* on a Roku.
+
+### YouTube search setup (owner, optional)
+1. In Google Cloud Console, create a project and enable **YouTube Data API v3**.
+2. Create an **API key**. Restrict it to *HTTP referrers* → `https://<you>.github.io/*`, and to the YouTube Data API v3 only.
+3. Paste it into `index.html` → `const YOUTUBE_API_KEY = '…'`, then upload.
+
+Quota: the free daily quota is 10,000 units and each search costs 100, so about **100 searches per day across all users**. Google offers more quota through its free API audit form. Pasting or sharing links doesn't use quota.
+
+## Spotify setup (owner, one time)
+
+1. Go to <https://developer.spotify.com/dashboard> → **Create app**. Choose **Web API**.
+2. Add a **Redirect URI** exactly matching your site, e.g. `https://<you>.github.io/mati-mote/` (and `…/index.html` if you open that URL directly).
+3. Copy the **Client ID** and paste it into `index.html` → `const SPOTIFY_CLIENT_ID = '…'`.
+4. Upload. In MATi: **Add a remote → Type: Speaker → Platform: Spotify Connect → Connect Spotify account**, then pick the speaker.
+
+Limits from Spotify, not MATi:
+- Playback control needs **Spotify Premium**.
+- New Spotify apps run in **development mode, limited to 25 users** you add under *User Management* in the dashboard. Opening it to everyone requires Spotify's *extended access*, which Spotify currently only grants to registered businesses with at least 250,000 monthly active users.
+
+## Device-side settings
 - **Roku:** Settings → System → Advanced system settings → *Control by mobile apps* → Enabled.
 - **Samsung:** approve the prompt; if denied, re-allow under Settings → General → External Device Manager → Device Connection Manager.
 - **LG:** enable Settings → General → *Mobile TV On* / *LG Connect Apps*.
+- **Denon / Marantz:** Setup → Network → Network Control → *Always On*.
+- Give each device a fixed IP (DHCP reservation in your router) so its address doesn't change.
+
+### Discovery
+- **Chrome 142+:** *Scan Wi-Fi for TVs* probes `x.x.x.1–254` on Roku 8060, Samsung 8001 and LG 3000.
+- **Everywhere else:** enter the IP from the device's network settings.
 
 ## Features
-- **Splash screen** on every launch, and an **animated landing page** with a color picker and **Start** button on first launch.
-- **Logo:** a tilted remote with a smiley in the middle, in your theme color, inside the app.
-- **App icon & browser-tab icon:** black square with a colored smiley and four white arrows. It follows your theme color for the tab and the iPhone home-screen icon (iOS captures the color at the moment you tap *Add to Home Screen*). The Android install icon comes from `manifest.json`, so it stays mint.
-- **On-screen keyboard:** every key is sent to the TV as you tap it, so it types into the search box of whatever app is open.
-- **Voice search:** tap the mic, speak, and MATi types what you said into the TV's search box. It uses your phone's speech recognition (Chrome on Android, Safari on iPhone). It can't feed live audio into a TV app's own mic button — no browser can.
-- **Troubleshooting:** if a TV can't be reached for ~12 seconds (or 3 button presses fail), a popup walks through Wi-Fi, IP address and certificate checks.
-- **Certificate trust with auto-return:** MATi opens the TV's certificate page and keeps retrying in the background; once it's trusted, MATi closes that page and finishes pairing. On iPhone, swipe back to MATi and it reconnects on its own.
-- **Button sounds** with an on/off switch in Settings.
-- **Immersive App cards** with light-follows-finger, 3D tilt and launch feedback. Official logos appear if you add them to `icons/apps/`.
-- Remote layout matching the reference design: power, device pill, settings, back/home, D-pad with OK, volume and channel rockers, mute, play/pause, menu, input, and a big **App** button.
-- **Touchpad mode:** swipe = arrows, tap = OK, long-press = Back. On LG it drives the real on-screen pointer.
-- **Unlimited remotes**: name, platform, IP and an icon (TV, Monitor, Projector, Soundbar, Stick, Box, Console, Speaker). Edit, remove and switch from the device pill. Pairing tokens are saved per device, so you approve on the TV only once.
-- **9 theme colors** (default **Mint**), saved on the device.
-- App launcher (Netflix, YouTube, Prime Video, Disney+, Spotify), on-screen keyboard to type into TV search, and an input picker on Roku.
-- Haptics (Android vibration; iOS 18+ system haptic), press-and-hold repeat, hardware keyboard shortcuts.
+- **Splash screen** on every launch, and an **animated landing page** with a color picker and **Start** on first launch.
+- **App icon & browser-tab icon:** black square, colored smiley, four white arrows; follows the theme color for the tab and the iPhone home-screen icon.
+- **Type & search:** on-screen keyboard for the TV's own text boxes (with live "text box ready" status on LG/Samsung), plus YouTube search/paste/share → plays on the TV. On Spotify speakers it becomes search-and-play.
+- **Voice:** phone speech recognition → typed into the TV text box, searched on YouTube, or played on Spotify, depending on what's on screen.
+- **Troubleshooting popup** after ~12 s unreachable or 3 failed presses (Wi-Fi → IP → certificate / Spotify checks).
+- **Certificate trust with auto-return** (Android closes the certificate page itself; on iPhone, swipe back and it reconnects).
+- **Button sounds** (on/off in Settings). They follow the iPhone silent switch, like the system keyboard clicks.
+- Buttons a device can't use are dimmed (e.g. channel keys on a speaker).
+- **Unlimited remotes**, **9 theme colors** (default Mint), haptics, touchpad mode (real pointer on LG), press-and-hold repeat.
 
 ## Changing styles
-Tailwind is compiled into `index.html` so the app works offline without a CDN. If you add or change Tailwind classes, rebuild:
+Tailwind is compiled into `index.html` so the app works offline without a CDN. After changing classes:
 
 ```bash
 TAILWIND=./tailwindcss-macos-arm64 ./build.sh   # standalone CLI from the Tailwind v3 GitHub releases
@@ -73,9 +135,7 @@ TAILWIND=./tailwindcss-macos-arm64 ./build.sh   # standalone CLI from the Tailwi
 ./build.sh                                      # uses npx tailwindcss@3
 ```
 
-Custom CSS (D-pad, sheet animations, etc.) lives in the second `<style>` block and needs no build.
-
 ## Notes
-- App IDs for launching are set in the `APPS` array in `index.html`; IDs can differ by region or model.
-- LG pairing sends an unsigned manifest. Most webOS versions accept it; if yours rejects the pairing, the TV shows an error and the app reports it.
-- Your remotes are stored in the browser's `localStorage` on that phone only.
+- App IDs for launching are in the `APPS` array in `index.html`; IDs can differ by region or model.
+- LG pairing sends an unsigned manifest. Most webOS versions accept it.
+- Remotes and the Spotify sign-in are stored in the browser's `localStorage` on that phone only.

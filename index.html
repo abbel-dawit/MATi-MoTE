@@ -13,10 +13,10 @@
 <meta name="apple-mobile-web-app-title" content="MATi">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest.json?v=2026.10.29.4">
 <script>/* apply the saved theme before first paint so the splash is already in the user's colour */
 try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r = document.documentElement.style; r.setProperty('--accent-rgb', v[0]); r.setProperty('--accent-ink', v[1]); r.setProperty('--ok-ink', v[2]); } } catch (e) {}</script>
-<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2026.10.29.4">
 <!-- Browser-tab favicon (static mint files; swapped to the user's theme color at runtime) -->
 <link id="favSvg" rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link id="favIcon" rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -26,7 +26,7 @@ try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <!-- Tailwind CSS, compiled & inlined by build.sh (no CDN → works offline) -->
-<style id="tailwind">/*TW-START*/*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{border:0 solid #e5e7eb;box-sizing:border-box}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:Poppins,ui-sans-serif,system-ui,-apple-system,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-tap-highlight-color:transparent}body{line-height:inherit;margin:0}hr{border-top-width:1px;color:inherit;height:0}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-size:1em;font-variation-settings:normal}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-collapse:collapse;border-color:inherit;text-indent:0}button,input,optgroup,select,textarea{color:inherit;font-family:inherit;font-feature-settings:inherit;font-size:100%;font-variation-settings:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{color:#9ca3af;opacity:1}input::placeholder,textarea::placeholder{color:#9ca3af;opacity:1}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{height:auto;max-width:100%}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;clip:rect(0,0,0,0);border-width:0;white-space:nowrap}.pointer-events-none{pointer-events:none}.visible{visibility:visible}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.inset-x-0{left:0;right:0}.-top-2{top:-.5rem}.-top-3{top:-.75rem}.bottom-0{bottom:0}.left-0{left:0}.left-1{left:.25rem}.left-1\/2{left:50%}.left-1\/4{left:25%}.right-0{right:0}.top-0{top:0}.top-1{top:.25rem}.top-1\/2{top:50%}.top-1\/4{top:25%}.isolate{isolation:isolate}.z-10{z-index:10}.z-40{z-index:40}.z-50{z-index:50}.z-\[70\]{z-index:70}.z-\[80\]{z-index:80}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-7{margin-top:1.75rem}.mt-8{margin-top:2rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.table{display:table}.grid{display:grid}.hidden{display:none}.aspect-square{aspect-ratio:1/1}.h-1{height:.25rem}.h-1\.5{height:.375rem}.h-1\/2{height:50%}.h-1\/3{height:33.333333%}.h-10{height:2.5rem}.h-11{height:2.75rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-2{height:.5rem}.h-20{height:5rem}.h-3{height:.75rem}.h-3\.5{height:.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-\[24\%\]{height:24%}.h-\[30px\]{height:30px}.h-full{height:100%}.max-h-\[88dvh\]{max-height:88dvh}.min-h-0{min-height:0}.min-h-\[150px\]{min-height:150px}.min-h-\[168px\]{min-height:168px}.min-h-\[48px\]{min-height:48px}.min-h-\[84px\]{min-height:84px}.w-0{width:0}.w-1{width:.25rem}.w-1\.5{width:.375rem}.w-1\/2{width:50%}.w-1\/3{width:33.333333%}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-2{width:.5rem}.w-20{width:5rem}.w-3{width:.75rem}.w-3\.5{width:.875rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-\[24\%\]{width:24%}.w-\[30px\]{width:30px}.w-full{width:100%}.min-w-0{min-width:0}.max-w-\[310px\]{max-width:310px}.max-w-\[380px\]{max-width:380px}.max-w-\[400px\]{max-width:400px}.max-w-\[440px\]{max-width:440px}.max-w-full{max-width:100%}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.translate-x-0{--tw-translate-x:0px}.scale-110,.translate-x-0{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}.cursor-pointer{cursor:pointer}.touch-none{touch-action:none}.appearance-none{-webkit-appearance:none;-moz-appearance:none;appearance:none}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.place-items-center{place-items:center}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-y-4{row-gap:1rem}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(.5rem*var(--tw-space-y-reverse));margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(1.25rem*var(--tw-space-y-reverse));margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(1.5rem*var(--tw-space-y-reverse));margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.break-all{word-break:break-all}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-\[20px\]{border-radius:20px}.rounded-\[28px\]{border-radius:28px}.rounded-\[36px\]{border-radius:36px}.rounded-full{border-radius:9999px}.rounded-t-\[32px\]{border-top-left-radius:32px;border-top-right-radius:32px}.border{border-width:1px}.border-t{border-top-width:1px}.border-accent{--tw-border-opacity:1;border-color:rgb(var(--accent-rgb)/var(--tw-border-opacity,1))}.border-accent\/60{border-color:rgb(var(--accent-rgb)/.6)}.border-amber-400{--tw-border-opacity:1;border-color:rgb(251 191 36/var(--tw-border-opacity,1))}.border-amber-400\/25{border-color:rgba(251,191,36,.25)}.border-emerald-400{--tw-border-opacity:1;border-color:rgb(52 211 153/var(--tw-border-opacity,1))}.border-emerald-400\/20{border-color:rgba(52,211,153,.2)}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255/var(--tw-border-opacity,1))}.border-white\/10{border-color:hsla(0,0%,100%,.1)}.bg-\[\#0e0f15\]{--tw-bg-opacity:1;background-color:rgb(14 15 21/var(--tw-bg-opacity,1))}.bg-\[\#13141b\]{--tw-bg-opacity:1;background-color:rgb(19 20 27/var(--tw-bg-opacity,1))}.bg-\[\#15161d\]{--tw-bg-opacity:1;background-color:rgb(21 22 29/var(--tw-bg-opacity,1))}.bg-\[\#1b1c25\]\/95{background-color:rgba(27,28,37,.95)}.bg-accent{--tw-bg-opacity:1;background-color:rgb(var(--accent-rgb)/var(--tw-bg-opacity,1))}.bg-accent\/10{background-color:rgb(var(--accent-rgb)/.1)}.bg-accent\/15{background-color:rgb(var(--accent-rgb)/.15)}.bg-amber-400{--tw-bg-opacity:1;background-color:rgb(251 191 36/var(--tw-bg-opacity,1))}.bg-amber-400\/10{background-color:rgba(251,191,36,.1)}.bg-amber-400\/5{background-color:rgba(251,191,36,.05)}.bg-base{--tw-bg-opacity:1;background-color:rgb(13 14 20/var(--tw-bg-opacity,1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.bg-black\/60{background-color:rgba(0,0,0,.6)}.bg-black\/65{background-color:rgba(0,0,0,.65)}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153/var(--tw-bg-opacity,1))}.bg-emerald-400\/5{background-color:rgba(52,211,153,.05)}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68/var(--tw-bg-opacity,1))}.bg-red-500\/10{background-color:rgba(239,68,68,.1)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-white\/10{background-color:hsla(0,0%,100%,.1)}.bg-white\/15{background-color:hsla(0,0%,100%,.15)}.bg-white\/5{background-color:hsla(0,0%,100%,.05)}.bg-white\/\[\.03\]{background-color:hsla(0,0%,100%,.03)}.bg-white\/\[\.04\]{background-color:hsla(0,0%,100%,.04)}.bg-zinc-500{--tw-bg-opacity:1;background-color:rgb(113 113 122/var(--tw-bg-opacity,1))}.bg-\[radial-gradient\(circle_at_50\%_30\%\2c \#191a23\2c \#101118\)\]{background-image:radial-gradient(circle at 50% 30%,#191a23,#101118)}.p-1{padding:.25rem}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-3\.5{padding:.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-1{padding-bottom:.25rem;padding-top:.25rem}.py-1\.5{padding-bottom:.375rem;padding-top:.375rem}.py-2{padding-bottom:.5rem;padding-top:.5rem}.py-2\.5{padding-bottom:.625rem;padding-top:.625rem}.py-3{padding-bottom:.75rem;padding-top:.75rem}.py-4{padding-bottom:1rem;padding-top:1rem}.pb-1{padding-bottom:.25rem}.pb-2{padding-bottom:.5rem}.pb-4{padding-bottom:1rem}.pl-1{padding-left:.25rem}.pl-1\.5{padding-left:.375rem}.pr-3{padding-right:.75rem}.pt-2{padding-top:.5rem}.pt-3{padding-top:.75rem}.pt-4{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.font-sans{font-family:Poppins,ui-sans-serif,system-ui,-apple-system,sans-serif}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12\.5px\]{font-size:12.5px}.text-\[12px\]{font-size:12px}.text-\[13px\]{font-size:13px}.text-\[14px\]{font-size:14px}.text-\[15px\]{font-size:15px}.text-\[16px\]{font-size:16px}.text-\[17px\]{font-size:17px}.text-\[18px\]{font-size:18px}.text-\[22px\]{font-size:22px}.text-\[28px\]{font-size:28px}.text-\[clamp\(18px\2c 5\.5vw\2c 24px\)\]{font-size:clamp(18px,5.5vw,24px)}.text-\[clamp\(34px\2c 10vw\2c 46px\)\]{font-size:clamp(34px,10vw,46px)}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-5{line-height:1.25rem}.leading-6{line-height:1.5rem}.leading-none{line-height:1}.leading-tight{line-height:1.25}.tracking-\[\.2em\]{letter-spacing:.2em}.tracking-\[\.32em\]{letter-spacing:.32em}.tracking-tight{letter-spacing:-.025em}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.text-\[\#14151c\]{--tw-text-opacity:1;color:rgb(20 21 28/var(--tw-text-opacity,1))}.text-\[\#e8e8ee\]{--tw-text-opacity:1;color:rgb(232 232 238/var(--tw-text-opacity,1))}.text-\[\#ff4d57\]{--tw-text-opacity:1;color:rgb(255 77 87/var(--tw-text-opacity,1))}.text-accent{--tw-text-opacity:1;color:rgb(var(--accent-rgb)/var(--tw-text-opacity,1))}.text-amber-100{--tw-text-opacity:1;color:rgb(254 243 199/var(--tw-text-opacity,1))}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(167 243 208/var(--tw-text-opacity,1))}.text-emerald-300{--tw-text-opacity:1;color:rgb(110 231 183/var(--tw-text-opacity,1))}.text-ink{color:var(--accent-ink)}.text-muted{--tw-text-opacity:1;color:rgb(139 141 152/var(--tw-text-opacity,1))}.text-red-300{--tw-text-opacity:1;color:rgb(252 165 165/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-white\/60{color:hsla(0,0%,100%,.6)}.text-white\/80{color:hsla(0,0%,100%,.8)}.text-zinc-200{--tw-text-opacity:1;color:rgb(228 228 231/var(--tw-text-opacity,1))}.text-zinc-300{--tw-text-opacity:1;color:rgb(212 212 216/var(--tw-text-opacity,1))}.text-zinc-400{--tw-text-opacity:1;color:rgb(161 161 170/var(--tw-text-opacity,1))}.opacity-60{opacity:.6}.opacity-90{opacity:.9}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-2xl,.shadow-\[0_10px_30px_rgb\(var\(--accent-rgb\)\/0\.35\)\]{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-\[0_10px_30px_rgb\(var\(--accent-rgb\)\/0\.35\)\]{--tw-shadow:0 10px 30px rgb(var(--accent-rgb)/0.35);--tw-shadow-colored:0 10px 30px var(--tw-shadow-color)}.shadow-\[0_1px_3px_rgba\(0\2c 0\2c 0\2c \.4\)\]{--tw-shadow:0 1px 3px rgba(0,0,0,.4);--tw-shadow-colored:0 1px 3px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-transparent{--tw-ring-color:transparent}.ring-white{--tw-ring-opacity:1;--tw-ring-color:rgb(255 255 255/var(--tw-ring-opacity,1))}.ring-offset-2{--tw-ring-offset-width:2px}.ring-offset-\[\#0a0b10\]{--tw-ring-offset-color:#0a0b10}.ring-offset-\[\#13141b\]{--tw-ring-offset-color:#13141b}.blur{--tw-blur:blur(8px)}.blur,.drop-shadow{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow{--tw-drop-shadow:drop-shadow(0 1px 2px rgba(0,0,0,.1)) drop-shadow(0 1px 1px rgba(0,0,0,.06))}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur{--tw-backdrop-blur:blur(8px)}.backdrop-blur,.backdrop-blur-\[2px\]{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-\[2px\]{--tw-backdrop-blur:blur(2px)}.backdrop-blur-\[3px\]{--tw-backdrop-blur:blur(3px)}.backdrop-blur-\[3px\],.backdrop-filter{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1)}.transition-all{transition-duration:.15s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1)}.transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.transition-opacity{transition-duration:.15s;transition-property:opacity;transition-timing-function:cubic-bezier(.4,0,.2,1)}.transition-transform{transition-duration:.15s;transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1)}.ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.ease-out{transition-timing-function:cubic-bezier(0,0,.2,1)}.focus\:border-accent:focus{--tw-border-opacity:1;border-color:rgb(var(--accent-rgb)/var(--tw-border-opacity,1))}.active\:scale-90:active{--tw-scale-x:.9;--tw-scale-y:.9}.active\:scale-90:active,.active\:scale-\[\.98\]:active{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.active\:scale-\[\.98\]:active{--tw-scale-x:.98;--tw-scale-y:.98}.active\:bg-white\/5:active{background-color:hsla(0,0%,100%,.05)}.peer:checked~.peer-checked\:translate-x-5{--tw-translate-x:1.25rem;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.peer:checked~.peer-checked\:bg-accent{--tw-bg-opacity:1;background-color:rgb(var(--accent-rgb)/var(--tw-bg-opacity,1))}.peer:focus-visible~.peer-focus-visible\:ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.peer:focus-visible~.peer-focus-visible\:ring-accent{--tw-ring-opacity:1;--tw-ring-color:rgb(var(--accent-rgb)/var(--tw-ring-opacity,1))}.peer:focus-visible~.peer-focus-visible\:ring-offset-2{--tw-ring-offset-width:2px}.peer:focus-visible~.peer-focus-visible\:ring-offset-\[\#13141b\]{--tw-ring-offset-color:#13141b}/*TW-END*/</style>
+<style id="tailwind">/*TW-START*/*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{border:0 solid #e5e7eb;box-sizing:border-box}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:Poppins,ui-sans-serif,system-ui,-apple-system,sans-serif;font-feature-settings:normal;font-variation-settings:normal;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-tap-highlight-color:transparent}body{line-height:inherit;margin:0}hr{border-top-width:1px;color:inherit;height:0}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-size:1em;font-variation-settings:normal}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{border-collapse:collapse;border-color:inherit;text-indent:0}button,input,optgroup,select,textarea{color:inherit;font-family:inherit;font-feature-settings:inherit;font-size:100%;font-variation-settings:inherit;font-weight:inherit;letter-spacing:inherit;line-height:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{color:#9ca3af;opacity:1}input::placeholder,textarea::placeholder{color:#9ca3af;opacity:1}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{height:auto;max-width:100%}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px;clip:rect(0,0,0,0);border-width:0;white-space:nowrap}.pointer-events-none{pointer-events:none}.visible{visibility:visible}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.inset-x-0{left:0;right:0}.-top-2{top:-.5rem}.-top-3{top:-.75rem}.bottom-0{bottom:0}.bottom-1{bottom:.25rem}.left-0{left:0}.left-1{left:.25rem}.left-1\/2{left:50%}.left-1\/4{left:25%}.right-0{right:0}.right-1{right:.25rem}.top-0{top:0}.top-1{top:.25rem}.top-1\/2{top:50%}.top-1\/4{top:25%}.isolate{isolation:isolate}.z-10{z-index:10}.z-40{z-index:40}.z-50{z-index:50}.z-\[70\]{z-index:70}.z-\[80\]{z-index:80}.col-span-2{grid-column:span 2/span 2}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-5{margin-top:1.25rem}.mt-7{margin-top:1.75rem}.mt-8{margin-top:2rem}.line-clamp-2{display:-webkit-box;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.table{display:table}.grid{display:grid}.hidden{display:none}.aspect-square{aspect-ratio:1/1}.aspect-video{aspect-ratio:16/9}.h-1{height:.25rem}.h-1\.5{height:.375rem}.h-1\/2{height:50%}.h-1\/3{height:33.333333%}.h-10{height:2.5rem}.h-11{height:2.75rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-16{height:4rem}.h-2{height:.5rem}.h-20{height:5rem}.h-3{height:.75rem}.h-3\.5{height:.875rem}.h-4{height:1rem}.h-5{height:1.25rem}.h-6{height:1.5rem}.h-7{height:1.75rem}.h-8{height:2rem}.h-9{height:2.25rem}.h-\[24\%\]{height:24%}.h-\[30px\]{height:30px}.h-full{height:100%}.max-h-\[88dvh\]{max-height:88dvh}.min-h-0{min-height:0}.min-h-\[150px\]{min-height:150px}.min-h-\[168px\]{min-height:168px}.min-h-\[48px\]{min-height:48px}.min-h-\[84px\]{min-height:84px}.w-0{width:0}.w-1{width:.25rem}.w-1\.5{width:.375rem}.w-1\/2{width:50%}.w-1\/3{width:33.333333%}.w-10{width:2.5rem}.w-11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-2{width:.5rem}.w-20{width:5rem}.w-28{width:7rem}.w-3{width:.75rem}.w-3\.5{width:.875rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-6{width:1.5rem}.w-7{width:1.75rem}.w-8{width:2rem}.w-9{width:2.25rem}.w-\[24\%\]{width:24%}.w-\[30px\]{width:30px}.w-full{width:100%}.min-w-0{min-width:0}.max-w-\[310px\]{max-width:310px}.max-w-\[380px\]{max-width:380px}.max-w-\[400px\]{max-width:400px}.max-w-\[440px\]{max-width:440px}.max-w-full{max-width:100%}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.translate-x-0{--tw-translate-x:0px}.scale-110,.translate-x-0{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.scale-110{--tw-scale-x:1.1;--tw-scale-y:1.1}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}.cursor-pointer{cursor:pointer}.cursor-text{cursor:text}.touch-none{touch-action:none}.appearance-none{-webkit-appearance:none;-moz-appearance:none;appearance:none}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.place-items-center{place-items:center}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-start{justify-content:flex-start}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-y-4{row-gap:1rem}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(.5rem*var(--tw-space-y-reverse));margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(1.25rem*var(--tw-space-y-reverse));margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)))}.space-y-6>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-bottom:calc(1.5rem*var(--tw-space-y-reverse));margin-top:calc(1.5rem*(1 - var(--tw-space-y-reverse)))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.break-all{word-break:break-all}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-\[20px\]{border-radius:20px}.rounded-\[28px\]{border-radius:28px}.rounded-\[36px\]{border-radius:36px}.rounded-full{border-radius:9999px}.rounded-xl{border-radius:.75rem}.rounded-t-\[32px\]{border-top-left-radius:32px;border-top-right-radius:32px}.border{border-width:1px}.border-t{border-top-width:1px}.border-accent{--tw-border-opacity:1;border-color:rgb(var(--accent-rgb)/var(--tw-border-opacity,1))}.border-accent\/60{border-color:rgb(var(--accent-rgb)/.6)}.border-amber-400{--tw-border-opacity:1;border-color:rgb(251 191 36/var(--tw-border-opacity,1))}.border-amber-400\/25{border-color:rgba(251,191,36,.25)}.border-emerald-400{--tw-border-opacity:1;border-color:rgb(52 211 153/var(--tw-border-opacity,1))}.border-emerald-400\/20{border-color:rgba(52,211,153,.2)}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255/var(--tw-border-opacity,1))}.border-white\/10{border-color:hsla(0,0%,100%,.1)}.border-white\/\[\.06\]{border-color:hsla(0,0%,100%,.06)}.bg-\[\#0e0f15\]{--tw-bg-opacity:1;background-color:rgb(14 15 21/var(--tw-bg-opacity,1))}.bg-\[\#13141b\]{--tw-bg-opacity:1;background-color:rgb(19 20 27/var(--tw-bg-opacity,1))}.bg-\[\#15161d\]{--tw-bg-opacity:1;background-color:rgb(21 22 29/var(--tw-bg-opacity,1))}.bg-\[\#1b1c25\]\/95{background-color:rgba(27,28,37,.95)}.bg-\[\#1ed760\]{--tw-bg-opacity:1;background-color:rgb(30 215 96/var(--tw-bg-opacity,1))}.bg-\[\#ff2d2d\]{--tw-bg-opacity:1;background-color:rgb(255 45 45/var(--tw-bg-opacity,1))}.bg-accent{--tw-bg-opacity:1;background-color:rgb(var(--accent-rgb)/var(--tw-bg-opacity,1))}.bg-accent\/10{background-color:rgb(var(--accent-rgb)/.1)}.bg-accent\/15{background-color:rgb(var(--accent-rgb)/.15)}.bg-amber-400{--tw-bg-opacity:1;background-color:rgb(251 191 36/var(--tw-bg-opacity,1))}.bg-amber-400\/10{background-color:rgba(251,191,36,.1)}.bg-amber-400\/5{background-color:rgba(251,191,36,.05)}.bg-base{--tw-bg-opacity:1;background-color:rgb(13 14 20/var(--tw-bg-opacity,1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.bg-black\/60{background-color:rgba(0,0,0,.6)}.bg-black\/65{background-color:rgba(0,0,0,.65)}.bg-emerald-400{--tw-bg-opacity:1;background-color:rgb(52 211 153/var(--tw-bg-opacity,1))}.bg-emerald-400\/5{background-color:rgba(52,211,153,.05)}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68/var(--tw-bg-opacity,1))}.bg-red-500\/10{background-color:rgba(239,68,68,.1)}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.bg-white\/10{background-color:hsla(0,0%,100%,.1)}.bg-white\/15{background-color:hsla(0,0%,100%,.15)}.bg-white\/5{background-color:hsla(0,0%,100%,.05)}.bg-white\/\[\.03\]{background-color:hsla(0,0%,100%,.03)}.bg-white\/\[\.04\]{background-color:hsla(0,0%,100%,.04)}.bg-zinc-500{--tw-bg-opacity:1;background-color:rgb(113 113 122/var(--tw-bg-opacity,1))}.bg-\[radial-gradient\(circle_at_50\%_30\%\2c \#191a23\2c \#101118\)\]{background-image:radial-gradient(circle at 50% 30%,#191a23,#101118)}.object-cover{-o-object-fit:cover;object-fit:cover}.p-1{padding:.25rem}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-3\.5{padding:.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-1{padding-bottom:.25rem;padding-top:.25rem}.py-1\.5{padding-bottom:.375rem;padding-top:.375rem}.py-2{padding-bottom:.5rem;padding-top:.5rem}.py-2\.5{padding-bottom:.625rem;padding-top:.625rem}.py-3{padding-bottom:.75rem;padding-top:.75rem}.py-4{padding-bottom:1rem;padding-top:1rem}.py-6{padding-bottom:1.5rem;padding-top:1.5rem}.py-8{padding-bottom:2rem;padding-top:2rem}.pb-1{padding-bottom:.25rem}.pb-2{padding-bottom:.5rem}.pb-4{padding-bottom:1rem}.pl-1{padding-left:.25rem}.pl-1\.5{padding-left:.375rem}.pr-3{padding-right:.75rem}.pt-2{padding-top:.5rem}.pt-2\.5{padding-top:.625rem}.pt-3{padding-top:.75rem}.pt-4{padding-top:1rem}.text-left{text-align:left}.text-center{text-align:center}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.font-sans{font-family:Poppins,ui-sans-serif,system-ui,-apple-system,sans-serif}.text-\[10\.5px\]{font-size:10.5px}.text-\[10px\]{font-size:10px}.text-\[11px\]{font-size:11px}.text-\[12\.5px\]{font-size:12.5px}.text-\[12px\]{font-size:12px}.text-\[13\.5px\]{font-size:13.5px}.text-\[13px\]{font-size:13px}.text-\[14px\]{font-size:14px}.text-\[15px\]{font-size:15px}.text-\[16px\]{font-size:16px}.text-\[17px\]{font-size:17px}.text-\[18px\]{font-size:18px}.text-\[22px\]{font-size:22px}.text-\[28px\]{font-size:28px}.text-\[clamp\(18px\2c 5\.5vw\2c 24px\)\]{font-size:clamp(18px,5.5vw,24px)}.text-\[clamp\(34px\2c 10vw\2c 46px\)\]{font-size:clamp(34px,10vw,46px)}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-5{line-height:1.25rem}.leading-6{line-height:1.5rem}.leading-none{line-height:1}.leading-snug{line-height:1.375}.leading-tight{line-height:1.25}.tracking-\[\.2em\]{letter-spacing:.2em}.tracking-\[\.32em\]{letter-spacing:.32em}.tracking-tight{letter-spacing:-.025em}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.text-\[\#14151c\]{--tw-text-opacity:1;color:rgb(20 21 28/var(--tw-text-opacity,1))}.text-\[\#1c1400\]{--tw-text-opacity:1;color:rgb(28 20 0/var(--tw-text-opacity,1))}.text-\[\#e8e8ee\]{--tw-text-opacity:1;color:rgb(232 232 238/var(--tw-text-opacity,1))}.text-\[\#ff4d57\]{--tw-text-opacity:1;color:rgb(255 77 87/var(--tw-text-opacity,1))}.text-accent{--tw-text-opacity:1;color:rgb(var(--accent-rgb)/var(--tw-text-opacity,1))}.text-amber-100{--tw-text-opacity:1;color:rgb(254 243 199/var(--tw-text-opacity,1))}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77/var(--tw-text-opacity,1))}.text-amber-300\/90{color:rgba(252,211,77,.9)}.text-black{--tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(167 243 208/var(--tw-text-opacity,1))}.text-emerald-300{--tw-text-opacity:1;color:rgb(110 231 183/var(--tw-text-opacity,1))}.text-ink{color:var(--accent-ink)}.text-muted{--tw-text-opacity:1;color:rgb(139 141 152/var(--tw-text-opacity,1))}.text-red-300{--tw-text-opacity:1;color:rgb(252 165 165/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-white\/60{color:hsla(0,0%,100%,.6)}.text-white\/80{color:hsla(0,0%,100%,.8)}.text-zinc-200{--tw-text-opacity:1;color:rgb(228 228 231/var(--tw-text-opacity,1))}.text-zinc-300{--tw-text-opacity:1;color:rgb(212 212 216/var(--tw-text-opacity,1))}.text-zinc-400{--tw-text-opacity:1;color:rgb(161 161 170/var(--tw-text-opacity,1))}.underline{text-decoration-line:underline}.underline-offset-2{text-underline-offset:2px}.opacity-30{opacity:.3}.opacity-40{opacity:.4}.opacity-60{opacity:.6}.opacity-90{opacity:.9}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color)}.shadow-2xl,.shadow-\[0_10px_30px_rgb\(var\(--accent-rgb\)\/0\.35\)\]{box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.shadow-\[0_10px_30px_rgb\(var\(--accent-rgb\)\/0\.35\)\]{--tw-shadow:0 10px 30px rgb(var(--accent-rgb)/0.35);--tw-shadow-colored:0 10px 30px var(--tw-shadow-color)}.shadow-\[0_1px_3px_rgba\(0\2c 0\2c 0\2c \.4\)\]{--tw-shadow:0 1px 3px rgba(0,0,0,.4);--tw-shadow-colored:0 1px 3px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.outline{outline-style:solid}.ring{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring,.ring-2{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-\[\#13141b\]{--tw-ring-opacity:1;--tw-ring-color:rgb(19 20 27/var(--tw-ring-opacity,1))}.ring-transparent{--tw-ring-color:transparent}.ring-white{--tw-ring-opacity:1;--tw-ring-color:rgb(255 255 255/var(--tw-ring-opacity,1))}.ring-offset-2{--tw-ring-offset-width:2px}.ring-offset-\[\#0a0b10\]{--tw-ring-offset-color:#0a0b10}.ring-offset-\[\#13141b\]{--tw-ring-offset-color:#13141b}.blur{--tw-blur:blur(8px)}.blur,.drop-shadow{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow{--tw-drop-shadow:drop-shadow(0 1px 2px rgba(0,0,0,.1)) drop-shadow(0 1px 1px rgba(0,0,0,.06))}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur{--tw-backdrop-blur:blur(8px)}.backdrop-blur,.backdrop-blur-\[2px\]{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-\[2px\]{--tw-backdrop-blur:blur(2px)}.backdrop-blur-\[3px\]{--tw-backdrop-blur:blur(3px)}.backdrop-blur-\[3px\],.backdrop-filter{-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1)}.transition-all{transition-duration:.15s;transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1)}.transition-colors{transition-duration:.15s;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1)}.transition-opacity{transition-duration:.15s;transition-property:opacity;transition-timing-function:cubic-bezier(.4,0,.2,1)}.transition-transform{transition-duration:.15s;transition-property:transform;transition-timing-function:cubic-bezier(.4,0,.2,1)}.ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.ease-out{transition-timing-function:cubic-bezier(0,0,.2,1)}.hover\:border-\[\#ff3b3b\]:hover{--tw-border-opacity:1;border-color:rgb(255 59 59/var(--tw-border-opacity,1))}.focus\:border-accent:focus{--tw-border-opacity:1;border-color:rgb(var(--accent-rgb)/var(--tw-border-opacity,1))}.active\:scale-90:active{--tw-scale-x:.9;--tw-scale-y:.9}.active\:scale-90:active,.active\:scale-\[\.98\]:active{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.active\:scale-\[\.98\]:active{--tw-scale-x:.98;--tw-scale-y:.98}.active\:border-\[\#ff3b3b\]:active{--tw-border-opacity:1;border-color:rgb(255 59 59/var(--tw-border-opacity,1))}.active\:bg-white\/5:active{background-color:hsla(0,0%,100%,.05)}.peer:checked~.peer-checked\:translate-x-5{--tw-translate-x:1.25rem;transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.peer:checked~.peer-checked\:bg-accent{--tw-bg-opacity:1;background-color:rgb(var(--accent-rgb)/var(--tw-bg-opacity,1))}.peer:focus-visible~.peer-focus-visible\:ring-2{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.peer:focus-visible~.peer-focus-visible\:ring-accent{--tw-ring-opacity:1;--tw-ring-color:rgb(var(--accent-rgb)/var(--tw-ring-opacity,1))}.peer:focus-visible~.peer-focus-visible\:ring-offset-2{--tw-ring-offset-width:2px}.peer:focus-visible~.peer-focus-visible\:ring-offset-\[\#13141b\]{--tw-ring-offset-color:#13141b}/*TW-END*/</style>
 <style>
   :root {
     --accent-rgb: 16 185 129;
@@ -404,7 +404,7 @@ const ICONS = {
   mic: P('<rect x="9" y="3" width="6" height="11.5" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/>'),
   backspace: P('<path d="M9 5h10.5A1.5 1.5 0 0 1 21 6.5v11a1.5 1.5 0 0 1-1.5 1.5H9l-6-7z"/><path d="M12.5 9.5l5 5M17.5 9.5l-5 5"/>'),
   shift: P('<path d="M12 4 4 12.5h4.5V20h7v-7.5H20z"/>'),
-  wifiOff: P('<path d="M3 3l18 18M8.5 16a5 5 0 0 1 7 0M5.5 12.5a9.5 9.5 0 0 1 4.2-2.4M2.5 9a14 14 0 0 1 4.6-2.9M14.3 10.2a9.5 9.5 0 0 1 4.2 2.3M17 6.6A14 14 0 0 1 21.5 9"/><path d="M12 19.5h.01"/>'),
+  wifiAlert: P('<path d="M2.6 9.4a13.8 13.8 0 0 1 18.8 0"/><path d="M5.8 12.8a9.2 9.2 0 0 1 12.4 0"/><path d="M9 16.2a4.6 4.6 0 0 1 6 0"/><circle cx="12" cy="19.4" r="1.2" fill="currentColor" stroke="none"/>'),
   hash: P('<path d="M5 9h15M4 15h15M10 3 8 21M16 3l-2 18"/>'),
   arrowRight: P('<path d="M5 12h14M13 6l6 6-6 6"/>'),
   wifi: P('<path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.5 16a5 5 0 0 1 7 0"/><path d="M12 19.5h.01"/>'),
@@ -414,18 +414,29 @@ const ICONS = {
   share: P('<path d="M12 15V3.5M8 7.5l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v7.5a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V12a1 1 0 0 0-1-1h-1"/>'),
 };
 /* Device-type icons users can pick for each remote */
-const DEVICE_ICONS = {
-  tv:        { label: 'TV',        svg: P('<rect x="2.5" y="6" width="19" height="12.5" rx="2"/><path d="M8 3l4 3 4-3M8.5 21.5h7"/>') },
-  monitor:   { label: 'Monitor',   svg: P('<rect x="3" y="4" width="18" height="12" rx="1.8"/><path d="M9 20.5h6M12 16v4.5"/>') },
-  projector: { label: 'Projector', svg: P('<rect x="2.5" y="8" width="19" height="9" rx="2.2"/><circle cx="16" cy="12.5" r="2.6"/><path d="M6 11h4M6 14h3M5.5 17v2M18.5 17v2"/>') },
-  soundbar:  { label: 'Soundbar',  svg: P('<rect x="2" y="9" width="20" height="6.5" rx="3.2"/><path d="M6.5 12.25h.01M10 12.25h.01M14 12.25h.01M17.5 12.25h.01"/>') },
-  stick:     { label: 'Stick',     svg: P('<rect x="8" y="2.5" width="8" height="13" rx="2"/><path d="M10 15.5v3h4v-3M12 6.5h.01"/>') },
-  box:       { label: 'Box',       svg: P('<rect x="3" y="8.5" width="18" height="8" rx="2.2"/><path d="M7 12.5h.01M13.5 12.5h4M6 16.5l-1 2.5M18 16.5l1 2.5"/>') },
-  console:   { label: 'Console',   svg: P('<path d="M7 8.5h10a4.5 4.5 0 0 1 4.4 5.4l-.4 2a2.8 2.8 0 0 1-4.9 1.2L14.6 15H9.4l-1.5 2.1A2.8 2.8 0 0 1 3 15.9l-.4-2A4.5 4.5 0 0 1 7 8.5z"/><path d="M7.5 11v3M6 12.5h3M15.5 11.5h.01M17.5 13.5h.01"/>') },
-  speaker:   { label: 'Speaker',   svg: P('<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><circle cx="12" cy="14.5" r="3.5"/><path d="M12 7h.01"/>') },
+const DEVICE_ICONS = {   // device TYPES (label + icon). Platforms per type are in TYPE_PLATFORMS.
+  tv:       { label: 'TV',            svg: P('<rect x="2.5" y="6" width="19" height="12.5" rx="2"/><path d="M8 3l4 3 4-3M8.5 21.5h7"/>') },
+  box:      { label: 'Streaming box', svg: P('<rect x="3" y="8.5" width="18" height="8" rx="2.2"/><path d="M7 12.5h.01M13.5 12.5h4M6 16.5l-1 2.5M18 16.5l1 2.5"/>') },
+  stick:    { label: 'Streaming stick', svg: P('<rect x="8" y="2.5" width="8" height="13" rx="2"/><path d="M10 15.5v3h4v-3M12 6.5h.01"/>') },
+  speaker:  { label: 'Speaker',       svg: P('<rect x="6" y="2.5" width="12" height="19" rx="2.5"/><circle cx="12" cy="14.5" r="3.5"/><path d="M12 7h.01"/>') },
+  soundbar: { label: 'Soundbar',      svg: P('<rect x="2" y="9" width="20" height="6.5" rx="3.2"/><path d="M6.5 12.25h.01M10 12.25h.01M14 12.25h.01M17.5 12.25h.01"/>') },
+  receiver: { label: 'AV receiver',   svg: P('<rect x="2.5" y="7" width="19" height="10" rx="2"/><circle cx="16.5" cy="12" r="2.6"/><path d="M5.5 10.5h5M5.5 13.5h3M4.5 17v2M19.5 17v2"/>') },
+  dvd:      { label: 'DVD / Blu-ray', svg: P('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2.5"/><path d="M12 5.5a6.5 6.5 0 0 1 6.5 6.5"/>') },
+  cable:    { label: 'Cable box',     svg: P('<rect x="2.5" y="9" width="19" height="8" rx="1.8"/><path d="M6 13h5M15.5 13h.01M18 13h.01M5 17v2M19 17v2M9 9l3-3.5L15 9"/>') },
 };
+const TYPE_PLATFORMS = {
+  tv:       ['samsung', 'lg', 'roku', 'androidtv', 'firetv', 'ir'],
+  box:      ['roku', 'androidtv', 'firetv'],
+  stick:    ['roku', 'androidtv', 'firetv'],
+  speaker:  ['spotify', 'sonos', 'bose'],
+  soundbar: ['sonos', 'bose', 'spotify', 'ir'],
+  receiver: ['denon', 'yamaha', 'spotify', 'ir'],
+  dvd:      ['ir'],
+  cable:    ['ir'],
+};
+const LEGACY_TYPE = { monitor: 'tv', projector: 'tv', console: 'box' };
+const typeOf = (d) => (DEVICE_ICONS[d.type] ? d.type : DEVICE_ICONS[d.icon] ? d.icon : LEGACY_TYPE[d.icon] || 'tv');
 
-/* ---------- Logo: tilted remote with a smiley in the middle, coloured by the theme ---------- */
 function logoSVG(fill = 'rgb(var(--accent-rgb))', ink = '#000000', { bg = false, scale = 1 } = {}) { /* the smiley face is always black */
   const body = '#1b1c26', key = '#2b2c39', well = '#12131a';
   const chev = 'fill:none;stroke:#ffffff;stroke-opacity:.8;stroke-width:6;stroke-linecap:round;stroke-linejoin:round';
@@ -557,8 +568,10 @@ const save = () => {
   store.set('mati.theme', state.theme);
   store.set('mati.settings', state.settings);
 };
-// Public build: drop any test/demo remotes left over from earlier versions
+// Public build: drop any test/demo remotes left over from earlier versions, and move old
+// "icon" choices onto the new device types.
 state.devices = state.devices.filter((d) => d.brand !== 'demo');
+state.devices.forEach((d) => { d.type = d.icon = typeOf(d); });
 if (!state.devices.some((d) => d.id === state.activeId)) state.activeId = state.devices[0]?.id || null;
 const activeDevice = () => state.devices.find((d) => d.id === state.activeId) || null;
 const uid = () => Math.random().toString(36).slice(2, 9);
@@ -582,25 +595,58 @@ function haptic() {
   if (IS_IOS) { try { $('#hapLbl').click(); } catch {} }
 }
 /* Button sounds: a short synthesized click (no audio files). Toggle in Settings › Sound.
-   'ambient' audio session: respects the iPhone silent switch and doesn't pause music. */
-let actx = null;
+   Why it sometimes went silent before: iPhone Safari only lets audio start from a finished tap
+   (touchend / click), not from touchstart / pointerdown, and it suspends audio again whenever the
+   app goes to the background. So: unlock and re-unlock on every finished tap, and if a click
+   arrives while audio is still locked, hold it and play it the instant the unlock lands.
+   'ambient' session = follows the iPhone silent switch like the system keyboard clicks do. */
+let actx = null, pendingSound = null, noiseBuf = null;
 try { if (navigator.audioSession) navigator.audioSession.type = 'ambient'; } catch {}
-const TONES = { key: 900, ok: 560, power: 300, type: 1500, del: 700, app: 660 };
+const TONES = { key: 900, ok: 560, power: 320, type: 1500, del: 720, app: 660 };
+function audioCtx() {
+  if (actx) return actx;
+  const C = window.AudioContext || window.webkitAudioContext;
+  if (!C) return null;
+  try { actx = new C({ latencyHint: 'interactive' }); } catch { actx = new C(); }
+  return actx;
+}
+function flushPending() { if (pendingSound && actx && actx.state === 'running') { const k = pendingSound; pendingSound = null; playClick(k); } }
+function unlockAudio() {
+  if (!state.settings.sound) return;
+  const c = audioCtx(); if (!c) return;
+  if (c.state !== 'running') {
+    c.resume().then(flushPending).catch(() => {});
+    try { const b = c.createBuffer(1, 1, 22050), src = c.createBufferSource(); src.buffer = b; src.connect(c.destination); src.start(0); } catch {}
+  } else flushPending();
+}
+['pointerup', 'touchend', 'click', 'keydown'].forEach((ev) => window.addEventListener(ev, unlockAudio, { capture: true, passive: true }));
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && actx && actx.state !== 'running') actx.resume().catch(() => {}); });
 function clickSound(kind = 'key') {
   if (!state.settings.sound) return;
+  const c = audioCtx(); if (!c) return;
+  if (c.state === 'running') { playClick(kind); return; }
+  pendingSound = kind;                       // played on resume (or on the touchend that follows)
+  c.resume().then(flushPending).catch(() => {});
+  setTimeout(() => { if (pendingSound === kind) pendingSound = null; }, 400); // never play a stale click late
+}
+function playClick(kind) {
   try {
-    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
-    if (actx.state === 'suspended') actx.resume();
-    const t = actx.currentTime, o = actx.createOscillator(), g = actx.createGain();
-    const f = TONES[kind] || TONES.key;
-    o.type = 'triangle';
-    o.frequency.setValueAtTime(f, t);
-    o.frequency.exponentialRampToValueAtTime(f * 0.55, t + 0.07);
-    g.gain.setValueAtTime(0.0001, t);
-    g.gain.exponentialRampToValueAtTime(kind === 'type' ? 0.09 : 0.16, t + 0.005);
-    g.gain.exponentialRampToValueAtTime(0.0001, t + 0.08);
-    o.connect(g).connect(actx.destination);
-    o.start(t); o.stop(t + 0.09);
+    const c = actx, t = c.currentTime + 0.002, f = TONES[kind] || TONES.key;
+    if (!noiseBuf) {                          // short decaying noise burst = the "tick"
+      noiseBuf = c.createBuffer(1, Math.ceil(c.sampleRate * 0.03), c.sampleRate);
+      const d = noiseBuf.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 4);
+    }
+    const n = c.createBufferSource(); n.buffer = noiseBuf;
+    const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = f * 2.4; bp.Q.value = 1.4;
+    const ng = c.createGain(); ng.gain.value = kind === 'type' ? 0.55 : 0.8;
+    n.connect(bp).connect(ng).connect(c.destination); n.start(t);
+    const o = c.createOscillator(), og = c.createGain();   // small pitched body so it isn't just hiss
+    o.type = 'sine'; o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(f * 0.6, t + 0.05);
+    og.gain.setValueAtTime(0.0001, t);
+    og.gain.exponentialRampToValueAtTime(kind === 'type' ? 0.14 : 0.26, t + 0.004);
+    og.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+    o.connect(og).connect(c.destination); o.start(t); o.stop(t + 0.07);
   } catch {}
 }
 function feedback(kind) { haptic(); clickSound(kind); }
@@ -644,6 +690,16 @@ function lanFetch(url, { method = 'GET', timeout = 2500, body } = {}) {
 
 class BaseDriver {
   constructor(device) { this.device = device; this.status = 'idle'; this.onStatus = () => {}; }
+  liveTyping = true;          // keyboard keys go to the TV one by one
+  canLaunch = true;           // has the App launcher
+  supports() { return true; } // which remote buttons do something
+  /* Is a text box on the TV ready to receive typing? true / false when the TV tells us
+     (LG, Samsung), null when the platform can't say (Roku). */
+  textReady = null;
+  fgApp = null;               // foreground app id, when the TV reports it (LG)
+  lastApp = null;             // last app MATi opened (APPS key)
+  onIme = () => {};
+  setTextReady(v) { if (this.textReady !== v) { this.textReady = v; this.onIme(); } }
   setStatus(s, msg = '') { this.status = s; this.onStatus(s, msg); }
   async connect() {}
   async send() {}
@@ -679,7 +735,11 @@ class RokuDriver extends BaseDriver {
     catch { this.setStatus('error', 'Command failed — Roku unreachable.'); throw new Error('roku'); }
   }
   async send(k) { const key = RokuDriver.KEYS[k]; if (key) await this.post(`keypress/${key}`); }
-  async launch(appKey) { const id = APPS.find((a) => a.key === appKey)?.ids.roku; if (id) await this.post(`launch/${id}`); }
+  async launch(appKey) { const id = APPS.find((a) => a.key === appKey)?.ids.roku; if (id) { await this.post(`launch/${id}`); this.lastApp = appKey; } }
+  // YouTube channel (837) deep link straight to a video
+  async playYouTube(id) { await this.post(`launch/837?contentId=${encodeURIComponent(id)}&mediaType=movie`); this.lastApp = 'youtube'; }
+  // Roku's own search across all streaming channels
+  async searchAll(q) { await this.post(`search/browse?keyword=${encodeURIComponent(q)}`); }
   async text(s) { for (const ch of s) await this.post(`keypress/Lit_${encodeURIComponent(ch)}`); }
   async typeChar(ch) { await this.post(`keypress/Lit_${encodeURIComponent(ch)}`); }
   async backspace() { await this.post('keypress/Backspace'); }
@@ -707,10 +767,13 @@ class SamsungDriver extends BaseDriver {
       this.ws.onopen = () => { opened = true; this.tlsOk = true; this.onTls?.(); };
       this.ws.onmessage = (ev) => {
         let m; try { m = JSON.parse(ev.data); } catch { return; }
-        if (m.event === 'ms.remote.imeStart') this.buf = '';
+        // The TV tells us when its own keyboard opens / closes on a text box
+        if (m.event === 'ms.remote.imeStart') { this.buf = ''; this.setTextReady(true); }
+        else if (m.event === 'ms.remote.imeEnd' || m.event === 'ms.remote.imeDone') this.setTextReady(false);
         if (m.event === 'ms.channel.connect') {
           clearTimeout(fail);
           if (m.data?.token) { this.device.token = m.data.token; save(); }
+          this.textReady = false;
           this.setStatus('online', 'Connected'); resolve();
         } else if (m.event === 'ms.channel.unauthorized') {
           clearTimeout(fail); this.setStatus('error', 'Access denied on the TV. Allow it under Settings › General › External Device Manager › Device Connection Manager.'); resolve();
@@ -735,6 +798,16 @@ class SamsungDriver extends BaseDriver {
   async launch(appKey) {
     const id = APPS.find((a) => a.key === appKey)?.ids.samsung; if (!id) return;
     this.raw({ method: 'ms.channel.emit', params: { event: 'ed.apps.launch', to: 'host', data: { appId: id, action_type: 'DEEP_LINK' } } });
+    this.lastApp = appKey;
+  }
+  /* Open a YouTube video on the TV. In Chrome on Android, use DIAL (the official way phones
+     start YouTube on TVs); otherwise ask the TV to open YouTube with the video id. */
+  async playYouTube(id) {
+    if (HAS_LNA) {
+      try { await lanFetch(`http://${this.device.ip}:8080/ws/apps/YouTube`, { method: 'POST', body: `v=${id}`, timeout: 4000 }); this.lastApp = 'youtube'; return; } catch {}
+    }
+    this.raw({ method: 'ms.channel.emit', params: { event: 'ed.apps.launch', to: 'host', data: { appId: '111299001912', action_type: 'DEEP_LINK', metaTag: `v=${id}` } } });
+    this.lastApp = 'youtube';
   }
   sendString(str) {
     const b64 = btoa(unescape(encodeURIComponent(str)));
@@ -786,10 +859,16 @@ class LGDriver extends BaseDriver {
             clearTimeout(fail);
             if (m.payload?.['client-key']) { this.device.token = m.payload['client-key']; save(); }
             await this.openPointer().catch(() => {});
+            this.textReady = false;
+            this.subscribe('ime_sub', 'ssap://com.webos.service.ime/registerRemoteKeyboard');
+            this.subscribe('fg_sub', 'ssap://com.webos.applicationManager/getForegroundAppInfo');
             this.setStatus('online', 'Connected'); resolve();
           } else if (m.type === 'error') { clearTimeout(fail); this.setStatus('error', `TV refused pairing: ${m.error || 'unknown error'}`); resolve(); }
           return;
         }
+        // live updates: is the TV's own keyboard open on a text box? which app is on screen?
+        if (m.id === 'ime_sub' && m.payload) { if ('currentWidget' in m.payload) this.setTextReady(!!m.payload.currentWidget?.focus); return; }
+        if (m.id === 'fg_sub' && m.payload?.appId !== undefined) { this.fgApp = m.payload.appId; if (this.fgApp !== 'com.webos.app.ime') this.onIme(); return; }
         const p = this.pending.get(m.id);
         if (p) { this.pending.delete(m.id); m.type === 'error' ? p.reject(new Error(m.error)) : p.resolve(m.payload); }
       };
@@ -803,6 +882,7 @@ class LGDriver extends BaseDriver {
     this.ws.send(JSON.stringify({ type: 'request', id, uri, ...(payload ? { payload } : {}) }));
     return withTimeout(new Promise((resolve, reject) => this.pending.set(id, { resolve, reject })), 5000);
   }
+  subscribe(id, uri) { try { this.ws.send(JSON.stringify({ type: 'subscribe', id, uri })); } catch {} }
   async openPointer() {
     const res = await this.request('ssap://com.webos.service.networkinput/getPointerInputSocket');
     if (!res?.socketPath) return;
@@ -828,7 +908,8 @@ class LGDriver extends BaseDriver {
   }
   pointer(dx, dy) { this.ptrSend(`type:move\ndx:${Math.round(dx)}\ndy:${Math.round(dy)}\ndown:0\n\n`); }
   click() { if (!this.ptrSend('type:click\n\n')) return this.send('ok'); }
-  async launch(appKey) { const id = APPS.find((a) => a.key === appKey)?.ids.lg; if (id) await this.request('ssap://system.launcher/launch', { id }); }
+  async launch(appKey) { const id = APPS.find((a) => a.key === appKey)?.ids.lg; if (id) { await this.request('ssap://system.launcher/launch', { id }); this.lastApp = appKey; } }
+  async playYouTube(id) { await this.request('ssap://system.launcher/launch', { id: 'youtube.leanback.v4', contentId: `v=${id}` }); this.lastApp = 'youtube'; }
   async text(s) { await this.request('ssap://com.webos.service.ime/insertText', { text: s, replace: 0 }); }
   async typeChar(ch) { return this.text(ch); }
   async backspace() { await this.request('ssap://com.webos.service.ime/deleteCharacters', { count: 1 }); }
@@ -836,10 +917,205 @@ class LGDriver extends BaseDriver {
   close() { try { this.ws && this.ws.close(); } catch {} try { this.ptr && this.ptr.close(); } catch {} this.ws = this.ptr = null; }
 }
 
+/* ---- Plain-HTTP devices on your Wi-Fi (Bose, Denon/Marantz, Yamaha). Like Roku, these only work
+   in Chrome on Android (Local Network Access); iPhone browsers block HTTP from HTTPS pages. ---- */
+class LanHttpDriver extends BaseDriver {
+  canLaunch = false; canType = false;
+  base() { return ''; }
+  probePath() { return '/'; }
+  get label() { return BRANDS[this.device.brand].name; }
+  async connect() {
+    if (IS_IOS) return this.setStatus('blocked', `iPhone browsers block plain-HTTP requests from secure pages, and ${this.label} only speaks HTTP. Use Chrome on Android${this.device.type === 'speaker' || this.device.type === 'soundbar' ? ', or set this speaker up with Spotify Connect' : ''}.`);
+    this.setStatus('connecting', 'Allow “local network” access if Chrome asks.');
+    try { await this.probe(); this.setStatus('online', 'Connected'); }
+    catch { this.setStatus(HAS_LNA ? 'error' : 'blocked', HAS_LNA ? `${this.label} didn’t answer. Check the IP address and that it’s on the same Wi-Fi.` : 'Your browser blocked the request. Use Chrome 142+ on Android.'); }
+  }
+  async probe() { await lanFetch(this.base() + this.probePath(), { timeout: 20000 }); }
+  async call(path, opts = {}) {
+    try { await lanFetch(this.base() + path, { timeout: 3000, ...opts }); if (this.status !== 'online') this.setStatus('online', 'Connected'); }
+    catch { this.setStatus('error', `${this.label} didn’t respond.`); throw new Error('lan'); }
+  }
+}
+
+/* Bose SoundTouch local API, port 8090: POST /key with a press + release. */
+class BoseDriver extends LanHttpDriver {
+  static KEYS = { power: 'POWER', ok: 'PLAY_PAUSE', playPause: 'PLAY_PAUSE', chUp: 'NEXT_TRACK', right: 'NEXT_TRACK', chDown: 'PREV_TRACK', left: 'PREV_TRACK',
+    volUp: 'VOLUME_UP', up: 'VOLUME_UP', volDown: 'VOLUME_DOWN', down: 'VOLUME_DOWN', mute: 'MUTE' };
+  base() { return `http://${this.device.ip}:8090`; }
+  probePath() { return '/info'; }
+  supports(k) { return k in BoseDriver.KEYS; }
+  async send(k) {
+    const key = BoseDriver.KEYS[k]; if (!key) return;
+    await this.call('/key', { method: 'POST', body: `<key state="press" sender="Gabbo">${key}</key>` });
+    await this.call('/key', { method: 'POST', body: `<key state="release" sender="Gabbo">${key}</key>` });
+  }
+}
+
+/* Denon / Marantz AVR HTTP control (port 8080 on 2016+ models, 80 on older ones). */
+class DenonDriver extends LanHttpDriver {
+  static CMDS = { volUp: 'MVUP', volDown: 'MVDOWN', up: 'MNCUP', down: 'MNCDN', left: 'MNCLT', right: 'MNCRT', ok: 'MNENT', back: 'MNRTN', menu: 'MNMEN%20ON', home: 'MNMEN%20ON' };
+  base() { return `http://${this.device.ip}:${this.port || 8080}`; }
+  probePath() { return '/goform/formMainZone_MainZoneXmlStatusLite.xml'; }
+  async probe() {
+    for (const port of [8080, 80]) { this.port = port; try { await super.probe(); return; } catch {} }
+    throw new Error('denon');
+  }
+  supports(k) { return k in DenonDriver.CMDS || ['power', 'mute', 'input'].includes(k); }
+  cmd(c) { return this.call(`/goform/formiPhoneAppDirect.xml?${c}`); }
+  async send(k) {
+    if (k === 'power') { this.on = !(this.on ?? true); return this.cmd(this.on ? 'PWON' : 'PWSTANDBY'); }
+    if (k === 'mute') { this.muted = !this.muted; return this.cmd(this.muted ? 'MUON' : 'MUOFF'); }
+    if (DenonDriver.CMDS[k]) return this.cmd(DenonDriver.CMDS[k]);
+  }
+  inputs() { return [['SITV', 'TV Audio'], ['SIBD', 'Blu-ray'], ['SIGAME', 'Game'], ['SISAT/CBL', 'Cable / Sat'], ['SIMPLAY', 'Media Player'], ['SIAUX1', 'AUX'], ['SINET', 'Network'], ['SIBT', 'Bluetooth']]; }
+  selectInput(code) { return this.cmd(code); }
+}
+
+/* Yamaha MusicCast (Yamaha Extended Control, plain HTTP GET). */
+class YamahaDriver extends LanHttpDriver {
+  base() { return `http://${this.device.ip}/YamahaExtendedControl/v1`; }
+  probePath() { return '/system/getDeviceInfo'; }
+  supports(k) { return ['power', 'volUp', 'volDown', 'up', 'down', 'mute', 'input', 'playPause', 'ok', 'chUp', 'chDown', 'left', 'right'].includes(k); }
+  async send(k) {
+    const m = {
+      power: '/main/setPower?power=toggle', volUp: '/main/setVolume?volume=up&step=2', up: '/main/setVolume?volume=up&step=2',
+      volDown: '/main/setVolume?volume=down&step=2', down: '/main/setVolume?volume=down&step=2',
+      chUp: '/netusb/setPlayback?playback=next', right: '/netusb/setPlayback?playback=next',
+      chDown: '/netusb/setPlayback?playback=previous', left: '/netusb/setPlayback?playback=previous',
+    };
+    if (k === 'mute') { this.muted = !this.muted; return this.call(`/main/setMute?enable=${this.muted}`); }
+    if (k === 'playPause' || k === 'ok') { this.playing = !(this.playing ?? false); return this.call(`/netusb/setPlayback?playback=${this.playing ? 'play' : 'pause'}`); }
+    if (m[k]) return this.call(m[k]);
+  }
+  inputs() { return [['hdmi1', 'HDMI 1'], ['hdmi2', 'HDMI 2'], ['hdmi3', 'HDMI 3'], ['tv', 'TV'], ['optical', 'Optical'], ['bluetooth', 'Bluetooth'], ['spotify', 'Spotify'], ['net_radio', 'Net Radio']]; }
+  selectInput(code) { return this.call(`/main/setInput?input=${code}`); }
+}
+
+/* ---- Spotify Connect via the official Spotify Web API (cloud). Works on iPhone and Android.
+   Set SPOTIFY_CLIENT_ID to your Spotify app's Client ID (see README). Playback control needs
+   Spotify Premium. New Spotify apps are limited to 25 allow-listed users unless Spotify grants
+   extended access. ---- */
+const SPOTIFY_CLIENT_ID = ''; // ← paste your Client ID from developer.spotify.com/dashboard
+const SP_SCOPES = 'user-read-playback-state user-modify-playback-state user-read-currently-playing';
+const SP = {
+  get tok() { return store.get('mati.spotify', null); },
+  set tok(v) { store.set('mati.spotify', v); },
+  redirect() { return location.origin + location.pathname; },
+  async login(returnDevId) {
+    if (!SPOTIFY_CLIENT_ID) { toast('Spotify isn’t set up in this copy of MATi yet.'); return; }
+    const rand = (n) => Array.from(crypto.getRandomValues(new Uint8Array(n)), (b) => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~'[b % 66]).join('');
+    const verifier = rand(64), st = rand(16);
+    const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(verifier));
+    const challenge = btoa(String.fromCharCode(...new Uint8Array(hash))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+    try { sessionStorage.setItem('mati.sp', JSON.stringify({ verifier, st, returnDevId })); } catch {}
+    store.set('mati.spPending', { verifier, st, returnDevId }); // iOS can drop sessionStorage across the redirect
+    const q = new URLSearchParams({ response_type: 'code', client_id: SPOTIFY_CLIENT_ID, scope: SP_SCOPES, redirect_uri: SP.redirect(), code_challenge_method: 'S256', code_challenge: challenge, state: st });
+    location.href = `https://accounts.spotify.com/authorize?${q}`;
+  },
+  async handleRedirect() {
+    const q = new URLSearchParams(location.search);
+    if (!q.get('code') && !q.get('error')) return null;
+    let pend = null;
+    try { pend = JSON.parse(sessionStorage.getItem('mati.sp') || 'null'); } catch {}
+    pend = pend || store.get('mati.spPending', null);
+    history.replaceState(null, '', SP.redirect());
+    store.set('mati.spPending', null);
+    if (q.get('error') || !pend || q.get('state') !== pend.st) return { error: true };
+    const r = await fetch('https://accounts.spotify.com/api/token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ grant_type: 'authorization_code', code: q.get('code'), redirect_uri: SP.redirect(), client_id: SPOTIFY_CLIENT_ID, code_verifier: pend.verifier }) });
+    if (!r.ok) return { error: true };
+    const j = await r.json();
+    SP.tok = { access: j.access_token, refresh: j.refresh_token, exp: Date.now() + j.expires_in * 1000 };
+    return { ok: true, devId: pend.returnDevId };
+  },
+  async access() {
+    const t = SP.tok; if (!t) throw new Error('Connect your Spotify account in this remote’s settings.');
+    if (Date.now() < t.exp - 60000) return t.access;
+    const r = await fetch('https://accounts.spotify.com/api/token', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: t.refresh, client_id: SPOTIFY_CLIENT_ID }) });
+    if (!r.ok) { SP.tok = null; throw new Error('Your Spotify sign-in expired. Reconnect it in this remote’s settings.'); }
+    const j = await r.json();
+    SP.tok = { access: j.access_token, refresh: j.refresh_token || t.refresh, exp: Date.now() + j.expires_in * 1000 };
+    return j.access_token;
+  },
+  async api(path, { method = 'GET', body } = {}) {
+    const r = await fetch(`https://api.spotify.com/v1${path}`, { method,
+      headers: { Authorization: `Bearer ${await SP.access()}`, ...(body ? { 'Content-Type': 'application/json' } : {}) },
+      body: body ? JSON.stringify(body) : undefined });
+    if (r.status === 204 || r.status === 202) return null;
+    const j = await r.json().catch(() => null);
+    if (!r.ok) {
+      const m = j?.error?.message || `Spotify error ${r.status}`;
+      throw new Error(/premium/i.test(m) ? 'Controlling playback needs Spotify Premium.' : m);
+    }
+    return j;
+  },
+};
+class SpotifyDriver extends BaseDriver {
+  liveTyping = false; canLaunch = false;
+  static KEYS = ['power', 'ok', 'playPause', 'volUp', 'volDown', 'up', 'down', 'mute', 'chUp', 'chDown', 'left', 'right'];
+  supports(k) { return SpotifyDriver.KEYS.includes(k); }
+  async connect() {
+    if (!SPOTIFY_CLIENT_ID) return this.setStatus('error', 'Spotify isn’t set up in this copy of MATi yet.');
+    if (!SP.tok) return this.setStatus('error', 'Connect your Spotify account in this remote’s settings.');
+    if (!this.device.spotifyDeviceId) return this.setStatus('error', 'Choose a speaker in this remote’s settings.');
+    this.setStatus('connecting', 'Checking Spotify…');
+    try {
+      const r = await SP.api('/me/player/devices');
+      const list = r?.devices || [];
+      const found = list.find((x) => x.id === this.device.spotifyDeviceId) || list.find((x) => x.name === this.device.spotifyDeviceName);
+      if (!found) return this.setStatus('error', `${this.device.spotifyDeviceName || 'That speaker'} isn’t showing in Spotify right now. Turn it on, or play something on it from the Spotify app.`);
+      this.devId = found.id; this.vol = found.volume_percent ?? 40;
+      if (found.id !== this.device.spotifyDeviceId) { this.device.spotifyDeviceId = found.id; save(); }
+      this.setStatus('online', 'Connected');
+    } catch (e) { this.setStatus('error', e.message); }
+  }
+  q() { return `device_id=${encodeURIComponent(this.devId)}`; }
+  async send(k) {
+    try {
+      if (k === 'ok' || k === 'playPause') {
+        const st = await SP.api('/me/player');
+        const playingHere = st?.is_playing && st?.device?.id === this.devId;
+        return SP.api(`/me/player/${playingHere ? 'pause' : 'play'}?${this.q()}`, { method: 'PUT' });
+      }
+      if (k === 'power') return SP.api(`/me/player/pause?${this.q()}`, { method: 'PUT' });
+      if (k === 'chUp' || k === 'right') return SP.api(`/me/player/next?${this.q()}`, { method: 'POST' });
+      if (k === 'chDown' || k === 'left') return SP.api(`/me/player/previous?${this.q()}`, { method: 'POST' });
+      if (k === 'volUp' || k === 'up') return this.vol_(this.vol + 6);
+      if (k === 'volDown' || k === 'down') return this.vol_(this.vol - 6);
+      if (k === 'mute') { if (this.vol > 0) { this.before = this.vol; return this.vol_(0); } return this.vol_(this.before || 30); }
+    } catch (e) { toast(esc(e.message), 3500); throw e; }
+  }
+  vol_(v) {   // volume taps are combined so holding the button doesn't flood Spotify
+    this.vol = Math.max(0, Math.min(100, Math.round(v)));
+    clearTimeout(this.vt);
+    return new Promise((res, rej) => { this.vt = setTimeout(() => SP.api(`/me/player/volume?volume_percent=${this.vol}&${this.q()}`, { method: 'PUT' }).then(res, rej), 180); });
+  }
+  async text(s) {
+    try {
+      const r = await SP.api(`/search?type=track&limit=1&q=${encodeURIComponent(s)}`);
+      const t = r?.tracks?.items?.[0];
+      if (!t) { toast(`No song found for “${esc(s)}”`); return; }
+      await SP.api(`/me/player/play?${this.q()}`, { method: 'PUT', body: { uris: [t.uri] } });
+      toast(`Playing ${esc(t.name)} — ${esc(t.artists?.[0]?.name || '')}`, 3500);
+    } catch (e) { toast(esc(e.message), 3500); throw e; }
+  }
+}
+
+/* ---- Platforms. "bridge" ones can't be reached by any web browser: they need raw TCP/UDP
+   sockets (ADB on port 5555, Broadlink UDP, Global Caché TCP 4998), which browsers don't allow. ---- */
 const BRANDS = {
-  roku:    { name: 'Roku',         Driver: RokuDriver,    port: 8060 },
-  samsung: { name: 'Samsung',      Driver: SamsungDriver, port: 8002 },
-  lg:      { name: 'LG webOS',     Driver: LGDriver,      port: 3001 },
+  samsung:   { name: 'Samsung Tizen',          Driver: SamsungDriver, ip: true },
+  lg:        { name: 'LG webOS',               Driver: LGDriver,      ip: true },
+  roku:      { name: 'Roku OS',                Driver: RokuDriver,    ip: true },
+  androidtv: { name: 'Android TV / Google TV',  bridge: true },
+  firetv:    { name: 'Fire TV',                bridge: true },
+  spotify:   { name: 'Spotify Connect',        Driver: SpotifyDriver, cloud: true },
+  sonos:     { name: 'Sonos',                  Driver: SpotifyDriver, cloud: true },
+  bose:      { name: 'Bose SoundTouch',        Driver: BoseDriver,    ip: true },
+  denon:     { name: 'Denon / Marantz',        Driver: DenonDriver,   ip: true },
+  yamaha:    { name: 'Yamaha MusicCast',       Driver: YamahaDriver,  ip: true },
+  ir:        { name: 'IR bridge',              bridge: true },
 };
 
 function compatNote(brand) {
@@ -850,6 +1126,21 @@ function compatNote(brand) {
   }
   if (brand === 'samsung') return { tone: 'info', text: 'Samsung Tizen TVs (2016+) over a secure WebSocket on port 8002. The TV uses a self-signed certificate: tap “Trust TV certificate”, accept the warning, come back and Connect, then approve MATi-MoTE on the TV. Turning the TV on from standby isn’t possible from a browser.' + (IS_IOS ? ' On iOS, Safari may not reuse the certificate exception for WebSockets — if it keeps failing, that’s the cause.' : '') };
   if (brand === 'lg') return { tone: 'info', text: 'LG webOS TVs over a secure WebSocket on port 3001. Tap “Trust TV certificate”, accept the warning, then Connect and accept the prompt on the TV. Enable Settings › General › Mobile TV On / LG Connect Apps. Power-on needs Wake-on-LAN, which browsers can’t send.' + (IS_IOS ? ' On iOS, Safari may not reuse the certificate exception for WebSockets.' : '') };
+  const lanHttp = (label, extra = '') => IS_IOS
+    ? { tone: 'warn', text: `iPhone browsers block plain-HTTP requests from secure HTTPS pages, and ${label} only speaks HTTP. Use Chrome on an Android phone${extra}.` }
+    : HAS_LNA ? { tone: 'ok', text: `Works in Chrome over your Wi-Fi. The first time, Chrome asks to “connect to devices on your local network” — tap Allow.` }
+    : { tone: 'warn', text: 'Needs Chrome 142 or newer (Local Network Access).' };
+  if (brand === 'bose') { const n = lanHttp('Bose SoundTouch', ', or choose Spotify Connect for this speaker'); n.text += ' For newer Bose Smart Speakers (no SoundTouch app), choose Spotify Connect instead.'; return n; }
+  if (brand === 'denon') { const n = lanHttp('Denon / Marantz'); n.text += ' Turn on Setup › Network › Network Control › Always On.'; return n; }
+  if (brand === 'yamaha') return lanHttp('Yamaha MusicCast');
+  if (brand === 'spotify' || brand === 'sonos') {
+    if (!SPOTIFY_CLIENT_ID) return { tone: 'warn', text: 'Spotify control isn’t set up in this copy of MATi yet — the app owner needs to add a Spotify Client ID (see README).' };
+    return { tone: 'ok', text: (brand === 'sonos'
+      ? 'Controls your Sonos through Spotify Connect — the official Spotify Web API. (Sonos’s own local API needs request types browsers block.) '
+      : 'Uses the official Spotify Web API, so it works on iPhone and Android. ') + 'Play/pause, next/previous, volume, and search-and-play with the keyboard or mic. Needs Spotify Premium.' };
+  }
+  if (brand === 'androidtv' || brand === 'firetv') return { tone: 'warn', text: 'Android TV, Google TV and Fire TV are controlled over ADB, which needs a raw network connection (TCP port 5555 with key pairing). No web browser — on iPhone or Android — is allowed to open those connections, so a web app can’t do it on its own. It needs a small MATi Bridge on your network.' };
+  if (brand === 'ir') return { tone: 'warn', text: 'Regular TVs, DVD players and cable boxes are controlled with infrared through a Broadlink RM4 or Global Caché hub. Those hubs only accept raw UDP/TCP packets, which web browsers can’t send, so this needs a small MATi Bridge on your network.' };
   return { tone: 'info', text: '' };
 }
 
@@ -865,7 +1156,7 @@ function connectActive() {
   const dev = activeDevice();
   renderPill();
   if (!dev) return;
-  if (!BRANDS[dev.brand]) return;
+  if (!BRANDS[dev.brand]?.Driver) { applyCapabilities(null); return; }
   const drv = new BRANDS[dev.brand].Driver(dev);
   drv.onStatus = (s, msg) => {
     if (drv !== state.driver) return; // a replaced driver
@@ -877,8 +1168,21 @@ function connectActive() {
     if (sheetView === 'editor' || sheetView === 'devices') refreshSheet();
   };
   drv.onTls = () => { if (trust.active && trust.devId === dev.id) trustPassed(dev); };
+  drv.onIme = () => { if (drv === state.driver && sheetView === 'keyboard') renderKbStatus(); };
   state.driver = drv;
+  applyCapabilities(drv);
   drv.connect();
+}
+/* Dim the buttons a device can't use (e.g. channel keys on a speaker). */
+function applyCapabilities(drv) {
+  document.querySelectorAll('#app [data-key]').forEach((el) => {
+    const off = !!drv && !drv.supports(el.dataset.key);
+    el.classList.toggle('opacity-30', off);
+    el.setAttribute('aria-disabled', off);
+  });
+  // App launcher: TVs. Spotify speakers reuse it as search-and-play. Keyboard/mic: anything that can take text.
+  $('#appsBtn').classList.toggle('opacity-40', !!drv && !drv.canLaunch && drv.liveTyping);
+  ['#kbMainBtn', '#micBtn'].forEach((id) => $(id).classList.toggle('opacity-30', !!drv && drv.canType === false));
 }
 
 /* ---- Troubleshooting: if a TV stays unreachable, walk the user through the usual causes ---- */
@@ -898,7 +1202,9 @@ function openTroubleshoot(dev) {
   troubleOpenFor = dev.id;
   const status = state.driver?.status;
   const needsTrust = dev.brand === 'samsung' || dev.brand === 'lg';
-  const blocked = dev.brand === 'roku' && IS_IOS;
+  const httpLan = ['roku', 'bose', 'denon', 'yamaha'].includes(dev.brand);
+  const blocked = httpLan && IS_IOS;
+  const cloud = !!BRANDS[dev.brand]?.cloud;
   const step = (n, title, body, extra = '') => `
     <li class="flex gap-3 rounded-2xl bg-white/[.04] p-3.5 text-left">
       <span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-accent text-[13px] font-semibold text-ink">${n}</span>
@@ -906,30 +1212,38 @@ function openTroubleshoot(dev) {
         <span class="mt-0.5 block text-[12.5px] leading-5 text-zinc-400">${body}</span>${extra}</span>
     </li>`;
   const body = blocked ? `
-      <p class="mt-2 text-[13px] leading-5 text-zinc-300">${compatNote('roku').text}</p>
+      <p class="mt-2 text-[13px] leading-5 text-zinc-300">${compatNote(dev.brand).text}</p>
       <div class="mt-5 grid gap-2"><button id="tsClose" ${btn('w-full bg-white/5')}>Close</button></div>` : `
       <p class="mt-1 text-[13px] text-zinc-400">Let’s check three things, in order:</p>
-      <ol class="mt-4 space-y-2">
-        ${step(1, 'Same Wi-Fi network', 'Your phone and TV must be on the same Wi-Fi — not a guest network, and with any VPN switched off.')}
-        ${step(2, 'Correct IP address', `On the TV, open Settings › Network › Network status and compare it with <span class="font-mono text-zinc-200">${esc(dev.ip)}</span>.`,
+      ${cloud ? `<ol class="mt-4 space-y-2">
+        ${step(1, 'Speaker is on', `Turn on ${esc(dev.spotifyDeviceName || 'the speaker')} and check it appears in the Spotify app’s device list.`)}
+        ${step(2, 'Spotify Premium', 'Controlling playback through Spotify needs a Premium account.')}
+        ${step(3, 'Spotify connected', 'Your Spotify sign-in may have expired.', `<button id="tsSpotify" class="mt-2 rounded-full bg-white/10 px-3 py-1.5 text-[12px] font-medium">Reconnect Spotify</button>`)}
+      </ol>` : `<ol class="mt-4 space-y-2">
+        ${step(1, 'Same Wi-Fi network', 'Your phone and the device must be on the same Wi-Fi — not a guest network, and with any VPN switched off.')}
+        ${step(2, 'Correct IP address', `On the device, open its network settings and compare its IP address with <span class="font-mono text-zinc-200">${esc(dev.ip)}</span>.`,
           `<button id="tsEdit" class="mt-2 rounded-full bg-white/10 px-3 py-1.5 text-[12px] font-medium">Edit IP address</button>`)}
         ${needsTrust
           ? step(3, 'TV certificate trusted', 'MATi needs to trust your TV’s security certificate once, then you approve MATi on the TV screen.',
               `<button id="tsTrust" class="mt-2 rounded-full bg-white/10 px-3 py-1.5 text-[12px] font-medium">Trust TV certificate</button>`)
-          : step(3, 'Local network access allowed', 'When Chrome asks to connect to devices on your local network, tap Allow. On the Roku, turn on Settings › System › Advanced system settings › Control by mobile apps.')}
-      </ol>
+          : step(3, 'Local network access allowed', `When Chrome asks to connect to devices on your local network, tap Allow.${dev.brand === 'roku' ? ' On the Roku, turn on Settings › System › Advanced system settings › Control by mobile apps.' : ''}`)}
+      </ol>`}
       <div class="mt-5 grid grid-cols-2 gap-2">
         <button id="tsClose" ${btn('bg-white/5')}>Close</button>
         <button id="tsRetry" ${btn('bg-accent text-ink')}>Try again</button>
       </div>`;
   openModal(`
-    <div class="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-amber-400/10 text-amber-300"><span class="h-7 w-7" data-icon="wifiOff"></span></div>
+    <div class="relative mx-auto mb-3 grid h-16 w-16 place-items-center rounded-full bg-amber-400/10 text-amber-300">
+      <span class="h-8 w-8" data-icon="wifiAlert"></span>
+      <span class="absolute bottom-1 right-1 grid h-5 w-5 place-items-center rounded-full bg-amber-400 text-[12px] font-bold leading-none text-[#1c1400] ring-2 ring-[#13141b]">!</span>
+    </div>
     <h2 id="modalTitle" class="text-[18px] font-semibold">Can’t reach ${esc(dev.name)}</h2>
     ${body}`);
   $('#tsClose')?.addEventListener('click', () => { troubleDismissed.add(dev.id); closeModal(); });
   $('#tsRetry')?.addEventListener('click', () => { closeModal(); failCount = 0; connectActive(); toast('Reconnecting…'); });
   $('#tsEdit')?.addEventListener('click', () => { closeModal(); openEditor(dev.id); });
   $('#tsTrust')?.addEventListener('click', () => { closeModal(); startTrust(dev); });
+  $('#tsSpotify')?.addEventListener('click', () => { closeModal(); SP.login(dev.id); });
 }
 
 /* ---- Centred modal helpers ---- */
@@ -991,6 +1305,7 @@ async function press(key) {
   if (!dev) { openDevices(); return; }
   const drv = state.driver;
   if (!drv) return;
+  if (!drv.supports(key)) { toast(`Not available on ${esc(BRANDS[dev.brand].name)}`); return; }
   if (key === 'input' && drv.inputs && drv.inputs()) { openInputs(); return; }
   try { await drv.send(key); }
   catch { if (++failCount >= 3 && !troubleDismissed.has(dev.id)) openTroubleshoot(dev); }
@@ -1160,111 +1475,122 @@ function openDevices() {
 /* ---- Add / edit a remote ---- */
 function openEditor(id, preset = {}) {
   const existing = state.devices.find((d) => d.id === id);
-  const d = existing ? { ...existing } : { id: null, name: '', brand: preset.brand || 'samsung', ip: preset.ip || '', icon: preset.icon || 'tv' };
-  const brandOpts = Object.entries(BRANDS).map(([k, b]) => `
-    <button type="button" data-brand="${k}" class="rounded-2xl border px-3 py-2.5 text-[13px] font-medium ${d.brand === k ? 'border-accent bg-accent/15 text-white' : 'border-white/10 bg-white/[.03] text-zinc-300'}">${b.name}</button>`).join('');
-  const iconOpts = Object.entries(DEVICE_ICONS).map(([k, ic]) => `
-    <button type="button" data-ico="${k}" aria-label="${ic.label}" class="flex flex-col items-center gap-1 rounded-2xl border p-2 ${d.icon === k ? 'border-accent bg-accent/15' : 'border-white/10 bg-white/[.03]'}">
-      <span class="h-6 w-6">${ic.svg}</span><span class="text-[10px] text-muted">${ic.label}</span>
+  const d = existing ? { ...existing } : { id: null, name: preset.name || '', type: preset.type || 'tv', brand: preset.brand || 'samsung', ip: preset.ip || '' };
+  d.type = typeOf(d);
+  if (!TYPE_PLATFORMS[d.type].includes(d.brand)) d.brand = TYPE_PLATFORMS[d.type].find((b) => !BRANDS[b].bridge) || TYPE_PLATFORMS[d.type][0];
+  const label = (t) => `<span class="mb-1.5 block text-[12px] font-medium uppercase tracking-wider text-muted">${t}</span>`;
+  const typeCls = (on) => `flex flex-col items-center justify-start gap-1 rounded-2xl border px-1 pb-2 pt-2.5 text-center ${on ? 'border-accent bg-accent/15' : 'border-white/10 bg-white/[.03]'}`;
+  const typeOpts = Object.entries(DEVICE_ICONS).map(([k, ic]) => `
+    <button type="button" data-type="${k}" aria-label="${ic.label}" class="${typeCls(d.type === k)}">
+      <span class="h-6 w-6">${ic.svg}</span><span class="text-[10px] leading-tight text-muted">${ic.label}</span>
     </button>`).join('');
 
   openSheet(existing ? 'Edit remote' : 'New remote', `
     <form id="devForm" class="space-y-5 pb-2" autocomplete="off">
-      <label class="block">
-        <span class="mb-1.5 block text-[12px] font-medium uppercase tracking-wider text-muted">Name</span>
+      <label class="block">${label('Name')}
         <input name="name" maxlength="24" required value="${esc(d.name)}" placeholder="Living Room TV"
           class="w-full rounded-2xl border border-white/10 bg-[#0e0f15] px-4 py-3 text-[15px] outline-none focus:border-accent">
       </label>
-      <div>
-        <span class="mb-1.5 block text-[12px] font-medium uppercase tracking-wider text-muted">Icon</span>
-        <div id="icoGrid" class="grid grid-cols-4 gap-2">${iconOpts}</div>
-      </div>
-      <div>
-        <span class="mb-1.5 block text-[12px] font-medium uppercase tracking-wider text-muted">TV platform</span>
-        <div id="brandGrid" class="grid grid-cols-3 gap-2">${brandOpts}</div>
-      </div>
-      <label id="ipRow" class="block">
-        <span class="mb-1.5 block text-[12px] font-medium uppercase tracking-wider text-muted">TV IP address</span>
-        <input name="ip" inputmode="decimal" value="${esc(d.ip)}" placeholder="192.168.1.42"
+      <div>${label('Type')}<div id="typeGrid" class="grid grid-cols-4 gap-2">${typeOpts}</div></div>
+      <div>${label('Platform')}<div id="brandGrid" class="grid grid-cols-2 gap-2"></div></div>
+      <label id="ipRow" class="block">${label('IP address')}
+        <input name="ip" inputmode="decimal" value="${esc(d.ip || '')}" placeholder="192.168.1.42"
           class="w-full rounded-2xl border border-white/10 bg-[#0e0f15] px-4 py-3 font-mono text-[15px] outline-none focus:border-accent">
-        <span class="mt-1.5 block text-[12px] text-muted">Find it on the TV under Settings › Network › Network status (or About).</span>
+        <span class="mt-1.5 block text-[12px] text-muted">Find it in the device’s settings under Network (Network status / About).</span>
       </label>
+      <div id="spRow" class="hidden"></div>
       <div id="compat"></div>
       <div id="connRow" class="${existing ? '' : 'hidden'} space-y-2">
         <div class="flex items-center gap-2 rounded-2xl bg-white/[.03] px-4 py-3 text-[13px]">
           <span id="edDot" class="h-2 w-2 rounded-full bg-zinc-500"></span><span id="edStatus" class="text-zinc-300">Not connected</span>
         </div>
-        <div class="grid grid-cols-2 gap-2">
-          <button type="button" id="trustBtn" ${btn('bg-white/5')}><span class="h-4 w-4" data-icon="shield"></span>Trust TV certificate</button>
+        <div id="connBtns" class="grid grid-cols-2 gap-2">
+          <button type="button" id="trustBtn" ${btn('bg-white/5')}><span class="h-4 w-4" data-icon="shield"></span>Trust certificate</button>
           <button type="button" id="testBtn" ${btn('bg-white/5')}><span class="h-4 w-4" data-icon="link"></span>Connect</button>
         </div>
       </div>
-      <button type="submit" ${btn('w-full bg-accent text-ink')}><span class="h-5 w-5" data-icon="check"></span>${existing ? 'Save changes' : 'Save remote'}</button>
+      <button type="submit" id="saveBtn" ${btn('w-full bg-accent text-ink')}></button>
       ${existing ? `<button type="button" id="delBtn" ${btn('w-full bg-red-500/10 text-red-300')}><span class="h-4 w-4" data-icon="trash"></span>Remove this remote</button>` : ''}
     </form>
   `, 'editor', { id: existing?.id });
 
   const form = $('#devForm');
-  const renderCompat = () => {
-    const c = compatNote(d.brand);
-    $('#compat').innerHTML = `<div class="flex gap-2.5 rounded-2xl border p-3.5 text-[12.5px] leading-5 ${toneCls[c.tone]}"><span class="mt-0.5 h-4 w-4 shrink-0" data-icon="info"></span><span>${c.text}</span></div>`;
-    paintIcons($('#compat'));
-    const trust = $('#trustBtn');
-    if (trust) trust.classList.toggle('hidden', !(d.brand === 'samsung' || d.brand === 'lg'));
+  const renderBrands = () => {
+    $('#brandGrid').innerHTML = TYPE_PLATFORMS[d.type].map((k) => {
+      const b = BRANDS[k], on = k === d.brand;
+      return `<button type="button" data-brand="${k}" class="flex flex-col items-start rounded-2xl border px-3 py-2.5 text-left text-[13px] font-medium ${on ? 'border-accent bg-accent/15 text-white' : 'border-white/10 bg-white/[.03] text-zinc-300'}">
+        <span>${b.name}</span>${b.bridge ? '<span class="mt-0.5 text-[10.5px] font-normal text-amber-300/90">Needs MATi Bridge</span>' : ''}</button>`;
+    }).join('');
   };
-  renderCompat();
-  updateEditorStatus();
+  const renderRows = () => {
+    const b = BRANDS[d.brand];
+    $('#ipRow').classList.toggle('hidden', !b.ip);
+    $('#spRow').classList.toggle('hidden', !b.cloud);
+    if (b.cloud) renderSpotifyRow(d);
+    const c = compatNote(d.brand);
+    $('#compat').innerHTML = c.text ? `<div class="flex gap-2.5 rounded-2xl border p-3.5 text-[12.5px] leading-5 ${toneCls[c.tone]}"><span class="mt-0.5 h-4 w-4 shrink-0" data-icon="info"></span><span>${c.text}</span></div>` : '';
+    paintIcons($('#compat'));
+    const trustable = d.brand === 'samsung' || d.brand === 'lg';
+    $('#trustBtn').classList.toggle('hidden', !trustable);
+    $('#connBtns').classList.toggle('grid-cols-2', trustable);
+    $('#connRow').classList.toggle('hidden', !existing || !!b.bridge);
+    const sb = $('#saveBtn');
+    sb.disabled = !!b.bridge;
+    sb.className = sb.className.replace(/\b(bg-accent|text-ink|bg-white\/5|text-muted)\b/g, '').trim() + (b.bridge ? ' bg-white/5 text-muted' : ' bg-accent text-ink');
+    sb.innerHTML = b.bridge ? 'Needs MATi Bridge — not available in a browser' : `<span class="h-5 w-5">${ICONS.check}</span>${existing ? 'Save changes' : 'Save remote'}`;
+  };
+  renderBrands(); renderRows(); updateEditorStatus();
 
+  $('#typeGrid').addEventListener('click', (e) => {
+    const t = e.target.closest('[data-type]'); if (!t) return;
+    d.type = t.dataset.type;
+    $('#typeGrid').querySelectorAll('[data-type]').forEach((x) => (x.className = typeCls(x.dataset.type === d.type)));
+    if (!TYPE_PLATFORMS[d.type].includes(d.brand)) d.brand = TYPE_PLATFORMS[d.type].find((b) => !BRANDS[b].bridge) || TYPE_PLATFORMS[d.type][0];
+    renderBrands(); renderRows();
+  });
   $('#brandGrid').addEventListener('click', (e) => {
     const b = e.target.closest('[data-brand]'); if (!b) return;
     d.brand = b.dataset.brand;
-    $('#brandGrid').querySelectorAll('[data-brand]').forEach((x) => {
-      const on = x.dataset.brand === d.brand;
-      x.className = `rounded-2xl border px-3 py-2.5 text-[13px] font-medium ${on ? 'border-accent bg-accent/15 text-white' : 'border-white/10 bg-white/[.03] text-zinc-300'}`;
-    });
-    renderCompat();
-  });
-  $('#icoGrid').addEventListener('click', (e) => {
-    const b = e.target.closest('[data-ico]'); if (!b) return;
-    d.icon = b.dataset.ico;
-    $('#icoGrid').querySelectorAll('[data-ico]').forEach((x) => {
-      x.className = `flex flex-col items-center gap-1 rounded-2xl border p-2 ${x.dataset.ico === d.icon ? 'border-accent bg-accent/15' : 'border-white/10 bg-white/[.03]'}`;
-    });
+    renderBrands(); renderRows();
   });
 
-  const collect = () => {
+  const collect = (forLogin = false) => {
+    const b = BRANDS[d.brand];
     const name = form.elements.name.value.trim();
     const ip = form.elements.ip.value.trim();
     if (!name) { toast('Give this remote a name.'); return null; }
-    if (!validIp(ip)) { toast('Enter a valid IP address, like 192.168.1.42'); return null; }
-    return { name, ip };
+    if (b.bridge) { toast('This platform needs a MATi Bridge.'); return null; }
+    if (b.ip && !validIp(ip)) { toast('Enter a valid IP address, like 192.168.1.42'); return null; }
+    if (b.cloud && !forLogin && SP.tok && !d.spotifyDeviceId) { toast('Choose which speaker this remote controls.'); return null; }
+    return { name, ip: b.ip ? ip : '' };
   };
-  const persist = () => {
-    const v = collect(); if (!v) return null;
+  const persist = (forLogin = false) => {
+    const v = collect(forLogin); if (!v) return null;
+    const fields = { name: v.name, ip: v.ip, brand: d.brand, type: d.type, icon: d.type, spotifyDeviceId: d.spotifyDeviceId, spotifyDeviceName: d.spotifyDeviceName };
     if (existing) {
       const target = state.devices.find((x) => x.id === existing.id);
       const changedTarget = target.ip !== v.ip || target.brand !== d.brand;
-      Object.assign(target, { name: v.name, ip: v.ip, brand: d.brand, icon: d.icon });
+      Object.assign(target, fields);
       if (changedTarget) delete target.token;
       save(); return target;
     }
-    const nd = { id: uid(), name: v.name, ip: v.ip, brand: d.brand, icon: d.icon };
+    const nd = { id: uid(), ...fields };
     state.devices.push(nd); save(); return nd;
   };
+  d._persistForLogin = () => persist(true);
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const saved = persist(); if (!saved) return;
     state.activeId = saved.id; save();
     connectActive(); setMode(state.settings.mode);
-    // keep the sheet open on the editor so the user sees pairing status
-    openEditor(saved.id);
+    openEditor(saved.id);   // stay here so the user sees pairing status
   });
-  $('#testBtn')?.addEventListener('click', () => {
+  $('#testBtn').addEventListener('click', () => {
     const saved = persist(); if (!saved) return;
     state.activeId = saved.id; save(); connectActive();
   });
-  $('#trustBtn')?.addEventListener('click', () => {
+  $('#trustBtn').addEventListener('click', () => {
     const saved = persist(); if (!saved) return;
     startTrust(saved);
   });
@@ -1274,6 +1600,39 @@ function openEditor(id, preset = {}) {
     if (state.activeId === existing.id) state.activeId = state.devices[0]?.id || null;
     save(); connectActive(); openDevices();
   });
+}
+/* Spotify account + speaker picker inside the editor */
+async function renderSpotifyRow(d) {
+  const row = $('#spRow'); if (!row) return;
+  const lbl = '<span class="mb-1.5 block text-[12px] font-medium uppercase tracking-wider text-muted">Spotify speaker</span>';
+  if (!SPOTIFY_CLIENT_ID) { row.innerHTML = ''; return; }
+  if (!SP.tok) {
+    row.innerHTML = `${lbl}<button type="button" id="spLogin" ${btn('w-full bg-[#1ed760] text-black')}>Connect Spotify account</button>`;
+    $('#spLogin').addEventListener('click', () => { const saved = d._persistForLogin?.(); if (saved) SP.login(saved.id); });
+    return;
+  }
+  row.innerHTML = `${lbl}
+    <div class="flex gap-2">
+      <select id="spDev" class="min-w-0 flex-1 rounded-2xl border border-white/10 bg-[#0e0f15] px-4 py-3 text-[15px] outline-none focus:border-accent"><option>Loading speakers…</option></select>
+      <button type="button" id="spRefresh" class="grid w-12 shrink-0 place-items-center rounded-2xl bg-white/5" aria-label="Refresh speakers"><span class="h-5 w-5">${ICONS.scan}</span></button>
+    </div>
+    <p class="mt-1.5 text-[12px] text-muted">Don’t see it? Turn the speaker on, or play something on it from the Spotify app, then refresh.</p>`;
+  const load = async () => {
+    const sel = $('#spDev'); if (!sel) return;
+    try {
+      const r = await SP.api('/me/player/devices');
+      const list = r?.devices || [];
+      if (d.spotifyDeviceName && !list.some((x) => x.id === d.spotifyDeviceId)) list.push({ id: d.spotifyDeviceId, name: `${d.spotifyDeviceName} (offline)` });
+      sel.innerHTML = list.length ? '<option value="">Choose a speaker…</option>' + list.map((x) => `<option value="${esc(x.id)}" ${x.id === d.spotifyDeviceId ? 'selected' : ''}>${esc(x.name)}${x.type ? ' · ' + esc(x.type) : ''}</option>`).join('')
+        : '<option value="">No speakers found</option>';
+    } catch (e) { sel.innerHTML = `<option value="">${esc(e.message)}</option>`; }
+  };
+  $('#spDev').addEventListener('change', (e) => {
+    d.spotifyDeviceId = e.target.value || undefined;
+    d.spotifyDeviceName = e.target.value ? e.target.selectedOptions[0].textContent.split(' · ')[0].replace(' (offline)', '') : undefined;
+  });
+  $('#spRefresh').addEventListener('click', load);
+  load();
 }
 function updateEditorStatus() {
   if (sheetView !== 'editor') return;
@@ -1379,6 +1738,10 @@ function appCard(a, i, featured) {
 function openApps() {
   const dev = activeDevice();
   if (!dev) { openDevices(); return; }
+  if (state.driver && !state.driver.canLaunch) {
+    if (!state.driver.liveTyping) { openKeyboard(); return; }   // Spotify: search & play
+    toast(`${esc(BRANDS[dev.brand].name)} doesn’t have apps to open.`); return;
+  }
   const [first, ...rest] = APPS;
   openSheet('Apps', `
     <div class="mb-4 flex items-center gap-2 text-[12px] text-muted">
@@ -1393,7 +1756,7 @@ function openApps() {
       <button id="kbBtn" class="app-card enter col-span-2 flex min-h-[84px] items-center gap-4 rounded-[28px] p-4"
         style="--c1:rgb(var(--accent-rgb) / .22);--c2:#101118;--glow:rgb(var(--accent-rgb));animation-delay:${APPS.length * 60}ms">
         <span class="app-badge grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-accent"><span class="h-6 w-6" data-icon="keyboard"></span></span>
-        <span class="flex-1 text-left"><span class="block text-[16px] font-semibold text-white">Keyboard</span><span class="text-[12px] text-white/60">Type or speak into TV search</span></span>
+        <span class="flex-1 text-left"><span class="block text-[16px] font-semibold text-white">Type & search</span><span class="text-[12px] text-white/60">Type on TV · YouTube search & play</span></span>
         <span class="h-5 w-5 text-white/60" data-icon="chevRight"></span>
       </button>
     </div>
@@ -1418,15 +1781,29 @@ function openApps() {
       setTimeout(() => card.classList.remove('launching'), 700);
     }
   }));
-  $('#kbBtn').addEventListener('click', openKeyboard);
+  $('#kbBtn').addEventListener('click', () => openKeyboard());
 }
-/* On-screen keyboard: each key is sent to the TV the moment you tap it, so it types straight
-   into whatever search / text box is open in the TV app (YouTube, Netflix, the TV browser…). */
+/* ======================================================================
+   TYPING & SEARCH
+   Two different things are needed, because TV apps take text in two different ways:
+
+   1. "Type on TV" — apps that use the TV's OWN keyboard (Roku search & keyboard, LG/Samsung
+      system keyboard: the TV browser, settings, many apps). MATi sends each key straight to
+      that text box. LG and Samsung also tell MATi whether such a text box is open, so MATi
+      can say "ready" or "open a search box first".
+
+   2. "YouTube" — YouTube (like Netflix, Prime Video and Disney+) draws its OWN keyboard on
+      every TV brand and ignores text sent from outside. So MATi searches YouTube on the phone
+      (or takes a pasted / shared link) and opens the chosen video directly on the TV.
+   ====================================================================== */
+const YOUTUBE_API_KEY = ''; // ← optional: a YouTube Data API v3 key lets people search YouTube inside MATi (see README)
+const OWN_KEYBOARD_APPS = { youtube: 'YouTube', netflix: 'Netflix', prime: 'Prime Video', disney: 'Disney+', spotify: 'Spotify',
+  'youtube.leanback.v4': 'YouTube', 'amazon': 'Prime Video', 'com.disney.disneyplus-prod': 'Disney+', 'spotify-beehive': 'Spotify' };
 const KB_LAYOUTS = {
   abc: [['q','w','e','r','t','y','u','i','o','p'], ['a','s','d','f','g','h','j','k','l'], ['{shift}','z','x','c','v','b','n','m','{bksp}'], ['{sym}','{space}','{mic}','{enter}']],
   sym: [['1','2','3','4','5','6','7','8','9','0'], ['-','/',':',';','(',')','$','&','@','"'], ['.',',','?','!',"'",'#','%','+','{bksp}'], ['{abc}','{space}','{mic}','{enter}']],
 };
-const kb = { layer: 'abc', shift: false, text: '' };
+const kb = { layer: 'abc', shift: false, text: '', focused: false, tab: 'type' };
 function kbKeyHTML(k) {
   const special = {
     '{shift}': `<button data-kb="{shift}" class="kb-key wide ${kb.shift ? 'on' : ''}" aria-label="Shift"><span class="h-5 w-5">${ICONS.shift}</span></button>`,
@@ -1435,7 +1812,7 @@ function kbKeyHTML(k) {
     '{abc}': `<button data-kb="{abc}" class="kb-key wide" aria-label="Letters">ABC</button>`,
     '{space}': `<button data-kb="{space}" class="kb-key space" aria-label="Space">space</button>`,
     '{mic}': SPEECH ? `<button data-kb="{mic}" class="kb-key wide" aria-label="Voice typing"><span class="h-5 w-5">${ICONS.mic}</span></button>` : '',
-    '{enter}': `<button data-kb="{enter}" class="kb-key go" aria-label="Search">Search</button>`,
+    '{enter}': state.driver && !state.driver.liveTyping ? `<button data-kb="{enter}" class="kb-key go" aria-label="Play">Play</button>` : `<button data-kb="{enter}" class="kb-key go" aria-label="Enter">Enter</button>`,
   };
   if (special[k] !== undefined) return special[k];
   const label = kb.shift ? k.toUpperCase() : k;
@@ -1447,34 +1824,178 @@ function renderKbKeys() {
 }
 function renderKbDisplay() {
   const el = $('#kbText'); if (!el) return;
-  el.innerHTML = kb.text ? `${esc(kb.text)}<span class="kb-caret"></span>` : `<span class="text-muted">Type here — it appears on your TV</span><span class="kb-caret"></span>`;
+  // Placeholder until the field is tapped or a key is pressed; then the cursor shows instead.
+  const caret = kb.focused ? '<span class="kb-caret"></span>' : '';
+  el.innerHTML = kb.text ? `${esc(kb.text)}${caret}` : kb.focused ? caret : '<span class="text-muted">Type here</span>';
+  el.classList.toggle('border-accent', kb.focused);
+}
+/* Which app is on the TV right now (LG tells us; otherwise the app MATi last opened). */
+function tvAppName(drv) {
+  if (!drv) return null;
+  if (drv.fgApp) return OWN_KEYBOARD_APPS[drv.fgApp] || null;
+  return drv.lastApp ? OWN_KEYBOARD_APPS[drv.lastApp] || null : null;
+}
+function youTubeContext(drv) {
+  return !!drv?.playYouTube && drv.textReady !== true && tvAppName(drv) === 'YouTube';
+}
+function renderKbStatus() {
+  const box = $('#kbStatus'); if (!box) return;
+  const drv = state.driver, dev = activeDevice();
+  if (!drv || !drv.liveTyping) { box.innerHTML = ''; return; }
+  const pill = (tone, html) => `<div class="flex gap-2.5 rounded-2xl border p-3 text-[12.5px] leading-5 ${toneCls[tone]}"><span class="mt-0.5 h-4 w-4 shrink-0">${ICONS[tone === 'ok' ? 'check' : 'info']}</span><span>${html}</span></div>`;
+  const app = tvAppName(drv);
+  const ytBtn = (t) => `<button type="button" data-goto="youtube" class="font-semibold underline underline-offset-2">${t}</button>`;
+  const ytLink = drv.playYouTube ? ' ' + ytBtn('Use the YouTube tab') + '.' : '';
+  if (drv.status !== 'online') box.innerHTML = pill('warn', `Not connected to ${esc(dev?.name || 'the TV')} yet.`);
+  else if (drv.textReady === true) box.innerHTML = pill('ok', 'A text box is open on the TV — type away.');
+  else if (drv.textReady === false && app)
+    box.innerHTML = pill('warn', `${esc(app)} on the TV uses its own keyboard, which can’t receive typed text.${app === 'YouTube' ? ytLink : ' Use the D-pad on its on-screen keyboard.'}`);
+  else if (drv.textReady === false)
+    box.innerHTML = pill('info', `No text box is open on the TV yet. Select a search or text box on the TV, and this turns green.${drv.playYouTube ? ' For YouTube, ' + ytBtn('use the YouTube tab') + '.' : ''}`);
+  else
+    box.innerHTML = pill('info', `Works wherever the TV shows Roku’s own keyboard. YouTube doesn’t accept typed text — ${ytBtn('use the YouTube tab')}.` +
+      (drv.searchAll ? ` <button type="button" id="rokuSearch" class="font-semibold underline underline-offset-2">Search all of Roku</button> for what you’ve typed.` : ''));
+  box.querySelector('[data-goto]')?.addEventListener('click', () => switchKbTab('youtube'));
+  $('#rokuSearch')?.addEventListener('click', async () => {
+    const q = kb.text.trim(); if (!q) { toast('Type what to search for first.'); return; }
+    feedback('ok'); try { await drv.searchAll(q); toast(`Searching Roku for “${esc(q)}”`); closeSheet(); } catch {}
+  });
 }
 async function kbPress(k) {
   const drv = state.driver;
-  if (!drv || drv.status !== 'online') { toast('Connect to your TV first.'); return; }
+  if (!drv || drv.status !== 'online') { toast('Connect first — tap the device name at the top.'); return; }
   try {
     if (k === '{shift}') { kb.shift = !kb.shift; renderKbKeys(); return feedback('key'); }
     if (k === '{sym}' || k === '{abc}') { kb.layer = k === '{sym}' ? 'sym' : 'abc'; renderKbKeys(); return feedback('key'); }
-    if (k === '{mic}') { closeSheet(); return startVoice(); }
-    if (k === '{bksp}') { feedback('del'); kb.text = kb.text.slice(0, -1); renderKbDisplay(); return await drv.backspace(); }
-    if (k === '{enter}') { feedback('ok'); kb.text = ''; renderKbDisplay(); return await drv.enter(); }
+    if (k === '{mic}') { return startVoice(drv.liveTyping ? 'type' : 'play'); }
+    if (k === '{bksp}') { feedback('del'); kb.focused = true; kb.text = kb.text.slice(0, -1); renderKbDisplay(); return drv.liveTyping ? await drv.backspace() : undefined; }
+    if (k === '{enter}') {
+      feedback('ok');
+      const q = kb.text; kb.text = ''; renderKbDisplay();
+      if (drv.liveTyping) return await drv.enter();
+      if (q.trim()) { closeSheet(); return await drv.text(q.trim()); }   // Spotify: search & play
+      return;
+    }
     const ch = k === '{space}' ? ' ' : k;
     feedback('type');
+    kb.focused = true;
     kb.text += ch; renderKbDisplay();
     if (kb.shift) { kb.shift = false; renderKbKeys(); }
-    await drv.typeChar(ch);
+    if (drv.liveTyping) {
+      if (drv.textReady === false) $('#kbStatus')?.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-5px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(0)' }], { duration: 260 });
+      await drv.typeChar(ch);
+    }
   } catch { /* the driver already reported the problem */ }
 }
-function openKeyboard() {
+
+/* ---------- YouTube: search on the phone (or paste / share a link), play on the TV ---------- */
+function ytId(text) {
+  const m = String(text || '').match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:[^#\s]*&)?v=|shorts\/|live\/|embed\/|v\/))([\w-]{11})/i);
+  return m ? m[1] : null;
+}
+const decodeHtml = (t) => { const x = document.createElement('textarea'); x.innerHTML = t; return x.value; };
+async function ytSearch(q) {
+  const u = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=15&safeSearch=moderate&q=${encodeURIComponent(q)}&key=${YOUTUBE_API_KEY}`;
+  const r = await fetch(u);
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(/quota/i.test(j?.error?.message || '') ? 'YouTube search is busy today. Paste a video link instead.' : 'YouTube search didn’t work. Paste a video link instead.');
+  return (j.items || []).filter((it) => it.id?.videoId).map((it) => ({
+    id: it.id.videoId, title: decodeHtml(it.snippet.title), channel: decodeHtml(it.snippet.channelTitle),
+    thumb: it.snippet.thumbnails?.medium?.url || `https://i.ytimg.com/vi/${it.id.videoId}/mqdefault.jpg`,
+  }));
+}
+async function playOnTv(id, title) {
+  const drv = state.driver, dev = activeDevice();
+  if (!drv || drv.status !== 'online') { toast('Connect first — tap the device name at the top.'); return; }
+  if (!drv.playYouTube) { toast(`${esc(BRANDS[dev.brand].name)} can’t play YouTube videos from MATi.`); return; }
+  feedback('app');
+  try { await drv.playYouTube(id); toast(`Opening on ${esc(dev.name)}${title ? ': ' + esc(title) : ''}`, 3200); closeSheet(); }
+  catch { toast('Couldn’t open that video on the TV.'); }
+}
+function ytResultHTML(v) {
+  return `<button data-yt="${esc(v.id)}" data-title="${esc(v.title)}" class="flex w-full items-center gap-3 rounded-2xl border border-white/[.06] bg-white/[.03] p-2 text-left transition-colors hover:border-[#ff3b3b] active:border-[#ff3b3b]">
+    <img src="${esc(v.thumb)}" alt="" loading="lazy" class="aspect-video w-28 shrink-0 rounded-xl bg-white/5 object-cover">
+    <span class="min-w-0 flex-1"><span class="line-clamp-2 block text-[13.5px] font-medium leading-snug">${esc(v.title)}</span>
+      ${v.channel ? `<span class="mt-0.5 block truncate text-[12px] text-muted">${esc(v.channel)}</span>` : ''}</span>
+    <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#ff2d2d] text-white"><span class="h-4 w-4">${ICONS.playPause}</span></span>
+  </button>`;
+}
+async function runYt(query) {
+  const out = $('#ytResults'); if (!out) return;
+  const q = (query ?? $('#ytQ')?.value ?? '').trim();
+  if (!q) return;
+  const id = ytId(q);
+  if (id) {   // a link: offer it straight away
+    out.innerHTML = ytResultHTML({ id, title: 'Video from your link', thumb: `https://i.ytimg.com/vi/${id}/mqdefault.jpg` });
+    return;
+  }
+  if (!YOUTUBE_API_KEY) {
+    out.innerHTML = `<p class="rounded-2xl bg-white/[.03] p-4 text-[13px] leading-5 text-zinc-300">Searching YouTube inside MATi isn’t switched on in this copy yet, so paste a video link instead: in the YouTube app on your phone tap <b>Share › Copy link</b>, then paste it above.${IS_IOS ? '' : ' Or tap <b>Share › MATi</b> in YouTube to send it here directly.'}</p>`;
+    return;
+  }
+  out.innerHTML = `<div class="grid place-items-center py-8"><span class="spinner"></span></div>`;
+  try {
+    const list = await ytSearch(q);
+    out.innerHTML = list.length ? list.map(ytResultHTML).join('') : `<p class="py-6 text-center text-[13px] text-muted">No videos found for “${esc(q)}”.</p>`;
+  } catch (e) { out.innerHTML = `<p class="rounded-2xl bg-white/[.03] p-4 text-[13px] text-zinc-300">${esc(e.message)}</p>`; }
+}
+
+/* ---------- The sheet: tabs "Type on TV" | "YouTube" ---------- */
+function switchKbTab(tab) {
+  kb.tab = tab;
+  document.querySelectorAll('[data-kbtab]').forEach((b) => {
+    const on = b.dataset.kbtab === tab;
+    b.className = `flex-1 rounded-full py-2 text-[13px] font-semibold transition-colors ${on ? 'bg-accent text-ink' : 'text-zinc-400'}`;
+    b.setAttribute('aria-selected', on);
+  });
+  $('#kbTypePane')?.classList.toggle('hidden', tab !== 'type');
+  $('#kbYtPane')?.classList.toggle('hidden', tab !== 'youtube');
+}
+function openKeyboard(tab, prefill) {
   const dev = activeDevice();
   if (!dev) { openDevices(); return; }
-  kb.layer = 'abc'; kb.shift = false; kb.text = '';
-  openSheet('Keyboard', `
-    <p class="mb-3 text-[12.5px] text-muted">Open a search box on ${esc(dev.name)}, then type. Every key goes straight to the TV.</p>
-    <div id="kbText" class="kb-display mb-3 flex items-center rounded-2xl border border-white/10 bg-[#0e0f15] px-4 py-3 text-[17px] break-all" aria-live="polite"></div>
-    <div id="kbKeys" class="pb-1"></div>
+  const drv = state.driver;
+  if (drv?.canType === false) { toast(`${esc(BRANDS[dev.brand].name)} doesn’t take typed text.`); return; }
+  kb.layer = 'abc'; kb.shift = false; kb.text = ''; kb.focused = false;
+  const live = !drv || drv.liveTyping;
+  const hasYt = !!drv?.playYouTube;
+  kb.tab = tab || (hasYt && youTubeContext(drv) ? 'youtube' : 'type');
+  openSheet(live ? 'Type & search' : 'Search & play', `
+    ${hasYt ? `<div class="mb-3 flex gap-1 rounded-full border border-white/10 bg-[#0e0f15] p-1" role="tablist">
+      <button type="button" data-kbtab="type" role="tab">Type on TV</button>
+      <button type="button" data-kbtab="youtube" role="tab">YouTube</button>
+    </div>` : ''}
+    <div id="kbTypePane">
+      ${live ? '<div id="kbStatus" class="mb-3"></div>' : `<p class="mb-3 text-[12.5px] text-muted">Type a song, artist or album, then tap Play to hear it on ${esc(dev.name)}.</p>`}
+      <div id="kbText" role="textbox" tabindex="0" class="kb-display mb-3 flex cursor-text items-center rounded-2xl border border-white/10 bg-[#0e0f15] px-4 py-3 text-[17px] break-all transition-colors" aria-live="polite"></div>
+      <div id="kbKeys" class="pb-1"></div>
+    </div>
+    ${hasYt ? `<div id="kbYtPane" class="hidden pb-2">
+      <form id="ytForm" class="flex gap-2" autocomplete="off">
+        <input id="ytQ" type="search" enterkeyhint="search" placeholder="${YOUTUBE_API_KEY ? 'Search YouTube or paste a link' : 'Paste a YouTube link'}"
+          class="min-w-0 flex-1 rounded-2xl border border-white/10 bg-[#0e0f15] px-4 py-3 text-[15px] outline-none focus:border-accent">
+        ${SPEECH && YOUTUBE_API_KEY ? `<button type="button" id="ytMic" class="grid w-12 shrink-0 place-items-center rounded-2xl bg-white/5" aria-label="Say what to search"><span class="h-5 w-5">${ICONS.mic}</span></button>` : ''}
+        ${navigator.clipboard?.readText ? `<button type="button" id="ytPaste" class="shrink-0 rounded-2xl bg-white/5 px-3 text-[13px] font-medium">Paste</button>` : ''}
+      </form>
+      <p class="mt-2 text-[12px] text-muted">Pick a video and it opens in YouTube on ${esc(dev.name)}.</p>
+      <div id="ytResults" class="mt-3 space-y-2"></div>
+    </div>` : ''}
   `, 'keyboard');
-  renderKbDisplay(); renderKbKeys();
+  renderKbDisplay(); renderKbKeys(); renderKbStatus();
+  if (hasYt) {
+    switchKbTab(kb.tab);
+    document.querySelectorAll('[data-kbtab]').forEach((b) => b.addEventListener('click', () => { feedback('key'); switchKbTab(b.dataset.kbtab); }));
+    $('#ytForm').addEventListener('submit', (e) => { e.preventDefault(); $('#ytQ').blur(); runYt(); });
+    $('#ytQ').addEventListener('input', (e) => { if (ytId(e.target.value)) runYt(); });
+    $('#ytPaste')?.addEventListener('click', async () => {
+      try { const t = await navigator.clipboard.readText(); $('#ytQ').value = t; runYt(t); }
+      catch { $('#ytQ').focus(); toast('Long-press the box and tap Paste.'); }
+    });
+    $('#ytMic')?.addEventListener('click', () => startVoice('youtube'));
+    $('#ytResults').addEventListener('click', (e) => { const b = e.target.closest('[data-yt]'); if (b) playOnTv(b.dataset.yt, b.dataset.title === 'Video from your link' ? '' : b.dataset.title); });
+    if (prefill) { $('#ytQ').value = prefill; runYt(prefill); }
+  }
+  $('#kbText').addEventListener('click', () => { kb.focused = true; renderKbDisplay(); });
   const box = $('#kbKeys');
   let t1, t2;
   const stop = () => { clearTimeout(t1); clearInterval(t2); box.querySelectorAll('.pressed').forEach((x) => x.classList.remove('pressed')); };
@@ -1493,11 +2014,17 @@ function openKeyboard() {
 const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
 const SPEECH = !!SpeechRec;
 let rec = null;
-function startVoice() {
+/* target: 'type' (into the TV text box), 'youtube' (search YouTube, play on TV), 'play' (Spotify),
+   or undefined = decide from what's on the TV. */
+let voiceTarget = null;
+function startVoice(target) {
   const dev = activeDevice();
   if (!dev) { openDevices(); return; }
+  if (state.driver?.canType === false) { toast(`${esc(BRANDS[dev.brand].name)} doesn’t take typed text.`); return; }
   if (!SPEECH) { toast('Voice typing isn’t available in this browser. Use the keyboard instead.'); return; }
-  if (state.driver?.status !== 'online') { toast('Connect to your TV first.'); return; }
+  if (state.driver?.status !== 'online') { toast('Connect first — tap the device name at the top.'); return; }
+  const drv = state.driver;
+  voiceTarget = target || (drv.liveTyping === false ? 'play' : youTubeContext(drv) && YOUTUBE_API_KEY ? 'youtube' : 'type');
   feedback('ok');
   openModal(`
     <div class="relative mx-auto mb-4 mt-2 grid h-20 w-20 place-items-center">
@@ -1505,11 +2032,11 @@ function startVoice() {
       <span class="relative grid h-16 w-16 place-items-center rounded-full bg-accent text-ink"><span class="h-7 w-7" data-icon="mic"></span></span>
     </div>
     <h2 id="modalTitle" class="text-[18px] font-semibold">Listening…</h2>
-    <p class="mt-1 text-[12.5px] text-muted">Open search on ${esc(dev.name)} first, then speak.</p>
+    <p class="mt-1 text-[12.5px] text-muted">${voiceTarget === 'play' ? 'Say a song, artist or album.' : voiceTarget === 'youtube' ? 'Say what you want to watch on YouTube.' : `Select a text box on ${esc(dev.name)} first, then speak.`}</p>
     <p id="voiceText" class="mt-4 min-h-[48px] rounded-2xl bg-white/[.04] px-4 py-3 text-[16px] text-zinc-200"> </p>
     <div class="mt-5 grid grid-cols-2 gap-2">
       <button id="vCancel" ${btn('bg-white/5')}>Cancel</button>
-      <button id="vDone" ${btn('bg-accent text-ink')}>Send to TV</button>
+      <button id="vDone" ${btn('bg-accent text-ink')}>${voiceTarget === 'play' ? 'Play' : voiceTarget === 'youtube' ? 'Search' : 'Send to TV'}</button>
     </div>`);
   $('#micBtn').classList.add('listening');
   let finalText = '', interim = '';
@@ -1540,7 +2067,13 @@ async function sendVoice(text) {
   rec = null;
   closeModal();
   if (!text) return;
-  try { await state.driver.text(text); feedback('ok'); toast(`Sent “${esc(text)}” to your TV`); } catch {}
+  if (voiceTarget === 'youtube') { openKeyboard('youtube', text); return; }
+  const drv = state.driver;
+  if (voiceTarget === 'type' && drv?.textReady === false) {
+    toast(`No text box is open on the TV. Select one first${drv.playYouTube ? ', or use the YouTube tab' : ''}.`, 3800);
+    return;
+  }
+  try { await drv.text(text); feedback('ok'); toast(drv.liveTyping === false ? `Searching “${esc(text)}”…` : `Typed “${esc(text)}” on your TV`); } catch {}
 }
 function stopVoice(silent) {
   $('#micBtn')?.classList.remove('listening');
@@ -1697,9 +2230,68 @@ document.addEventListener('visibilitychange', () => {
   else if ((activeDevice()?.brand === 'samsung' || activeDevice()?.brand === 'lg') && !state.driver.ws) connectActive();
 });
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js', { scope: './' }).catch(() => {}));
+/* ---- Automatic updates ----
+   Every upload to GitHub gets a new build number (version.json). MATi checks it on launch,
+   whenever you come back to the app, and every 15 minutes; if it's newer, it reloads itself.
+   The service worker also always asks GitHub for fresh files first and only falls back to the
+   saved copy when you're offline. */
+const BUILD = '2026.10.29.4';
+let swReg = null, updating = false;
+async function checkForUpdate() {
+  if (updating || !navigator.onLine) return;
+  try {
+    const r = await fetch(`./version.json?t=${Date.now()}`, { cache: 'no-store' });
+    if (!r.ok) return;
+    const { build } = await r.json();
+    if (!build || build === BUILD) return;
+    const last = store.get('mati.updateTry', {});
+    if (last.build === build && Date.now() - last.at < 5 * 60 * 1000) return; // GitHub's CDN may lag a few minutes
+    store.set('mati.updateTry', { build, at: Date.now() });
+    updating = true;
+    try { await swReg?.update(); } catch {}
+    toast('Updating MATi…', 1500);
+    setTimeout(() => location.reload(), 900);
+  } catch {}
 }
+if ('serviceWorker' in navigator) {
+  const hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (hadController && !updating) { updating = true; location.reload(); } });
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js', { scope: './', updateViaCache: 'none' })
+      .then((r) => { swReg = r; r.update().catch(() => {}); })
+      .catch(() => {});
+  });
+}
+setTimeout(checkForUpdate, 2500);
+setInterval(checkForUpdate, 15 * 60 * 1000);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { checkForUpdate(); swReg?.update().catch(() => {}); } });
+
+/* ---- Shared from another app (Android: YouTube › Share › MATi) ---- */
+(() => {
+  const q = new URLSearchParams(location.search);
+  const shared = [q.get('url'), q.get('text'), q.get('title')].filter(Boolean).join(' ');
+  if (!shared) return;
+  history.replaceState(null, '', location.origin + location.pathname);
+  const id = ytId(shared);
+  if (!id) return;
+  const go = (tries = 0) => {
+    if (state.driver?.status === 'online' || tries > 12) openKeyboard('youtube', `https://youtu.be/${id}`);
+    else setTimeout(() => go(tries + 1), 500);
+  };
+  setTimeout(go, 1900);
+})();
+
+/* ---- Back from Spotify sign-in ---- */
+SP.handleRedirect().then((res) => {
+  if (!res) return;
+  if (res.ok) {
+    toast('Spotify connected ✓ Now choose the speaker.', 3500);
+    if (res.devId && state.devices.some((x) => x.id === res.devId)) {
+      state.activeId = res.devId; save(); connectActive();
+      setTimeout(() => openEditor(res.devId), 1900);
+    }
+  } else toast('Spotify sign-in didn’t finish. Try again from the remote’s settings.', 4000);
+}).catch(() => toast('Couldn’t finish Spotify sign-in.'));
 </script>
 </body>
 </html>
