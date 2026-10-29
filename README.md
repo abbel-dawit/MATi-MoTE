@@ -33,7 +33,6 @@ Browsers deliberately limit what an HTTPS page can do on your home network, so s
 | **Roku** (ECP, HTTP :8060) | ✅ Works. Chrome's *Local Network Access* lets an HTTPS page call a private IP with `fetch(url, { targetAddressSpace: 'local' })` after you tap **Allow**. | ❌ Not possible. iOS blocks HTTP requests from HTTPS pages, Roku only speaks HTTP, and GitHub Pages is HTTPS-only. |
 | **Samsung Tizen 2016+** (WSS :8002) | ✅ After a one-time **Trust TV certificate** step, then approve MATi on the TV. | ⚠️ Best effort. Same trust step; Safari doesn't always reuse the certificate exception for WebSockets. |
 | **LG webOS** (WSS :3001) | ✅ After **Trust TV certificate**, accept the pairing prompt on the TV. | ⚠️ Best effort, same caveat. |
-| **Demo** | ✅ | ✅ |
 
 Why not WebRTC or WebTransport? Both need software on the *other* end — a WebRTC peer or an HTTP/3 server. TVs don't run either for remote control, so neither can reach a TV without a bridge.
 
@@ -49,12 +48,18 @@ Also not possible from any browser: turning a Samsung/LG TV **on** (needs Wake-o
 - **LG:** enable Settings → General → *Mobile TV On* / *LG Connect Apps*.
 
 ## Features
-- **Splash screen** on every launch, then an **animated landing page** with a color picker and **Start** button on first launch (turn it on for every launch, or replay it, in Settings).
-- **Logo:** a tilted remote with a smiley in the middle. It's drawn in code, so it follows your theme color everywhere in the app, including the favicon and the iPhone home-screen icon (iOS captures the color at the moment you tap *Add to Home Screen*). The Android install icon comes from `manifest.json`, so it stays mint.
+- **Splash screen** on every launch, and an **animated landing page** with a color picker and **Start** button on first launch.
+- **Logo:** a tilted remote with a smiley in the middle, in your theme color, inside the app.
+- **App icon & browser-tab icon:** black square with a colored smiley and four white arrows. It follows your theme color for the tab and the iPhone home-screen icon (iOS captures the color at the moment you tap *Add to Home Screen*). The Android install icon comes from `manifest.json`, so it stays mint.
+- **On-screen keyboard:** every key is sent to the TV as you tap it, so it types into the search box of whatever app is open.
+- **Voice search:** tap the mic, speak, and MATi types what you said into the TV's search box. It uses your phone's speech recognition (Chrome on Android, Safari on iPhone). It can't feed live audio into a TV app's own mic button — no browser can.
+- **Troubleshooting:** if a TV can't be reached for ~12 seconds (or 3 button presses fail), a popup walks through Wi-Fi, IP address and certificate checks.
+- **Certificate trust with auto-return:** MATi opens the TV's certificate page and keeps retrying in the background; once it's trusted, MATi closes that page and finishes pairing. On iPhone, swipe back to MATi and it reconnects on its own.
+- **Button sounds** with an on/off switch in Settings.
 - **Immersive App cards** with light-follows-finger, 3D tilt and launch feedback. Official logos appear if you add them to `icons/apps/`.
 - Remote layout matching the reference design: power, device pill, settings, back/home, D-pad with OK, volume and channel rockers, mute, play/pause, menu, input, and a big **App** button.
 - **Touchpad mode:** swipe = arrows, tap = OK, long-press = Back. On LG it drives the real on-screen pointer.
-- **Up to 3 remotes**: name, platform, IP and an icon (TV, Monitor, Projector, Soundbar, Stick, Box, Console, Speaker). Edit, remove and switch from the device pill. Pairing tokens are saved per device, so you approve on the TV only once.
+- **Unlimited remotes**: name, platform, IP and an icon (TV, Monitor, Projector, Soundbar, Stick, Box, Console, Speaker). Edit, remove and switch from the device pill. Pairing tokens are saved per device, so you approve on the TV only once.
 - **9 theme colors** (default **Mint**), saved on the device.
 - App launcher (Netflix, YouTube, Prime Video, Disney+, Spotify), on-screen keyboard to type into TV search, and an input picker on Roku.
 - Haptics (Android vibration; iOS 18+ system haptic), press-and-hold repeat, hardware keyboard shortcuts.

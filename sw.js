@@ -6,7 +6,7 @@
  *   the TV's own responses work normally.
  * Bump VERSION whenever you deploy changes.
  */
-const VERSION = 'mati-v1.1.3';
+const VERSION = 'mati-v1.2.0';
 const SHELL = [
   './',
   './index.html',
