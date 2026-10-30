@@ -13,45 +13,38 @@
 <meta name="apple-mobile-web-app-title" content="MATi">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
-<link rel="manifest" href="manifest.json?v=2026.10.30.5">
+<link rel="manifest" href="manifest.json?v=2026.10.30.6">
 <script>/* apply the saved theme before first paint so the splash is already in the user's colour */
 try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r = document.documentElement.style; r.setProperty('--accent-rgb', v[0]); r.setProperty('--accent-ink', v[1]); r.setProperty('--ok-ink', v[2]); } } catch (e) {}</script>
-<script>/* Portrait lock. Installed Android apps are locked by manifest.json; everywhere else (iPhone,
-   browser tabs) the OS still rotates the page, so when a phone turns sideways we turn the whole app
-   back the other way. It then stays exactly as it looks in portrait, fixed to the phone. */
+<script>/* Portrait only. Installed Android apps are locked by manifest.json; everywhere else (iPhone,
+   browser tabs) the OS still rotates the page, so when a phone is held sideways we cover the app
+   with a "turn your phone upright" screen (#rotateGate) until it's back in portrait. */
 (function () {
   var d = document.documentElement;
   function angle() {
-    var a = screen.orientation && typeof screen.orientation.angle === 'number' ? screen.orientation.angle : (window.orientation || 0);
-    return ((a % 360) + 360) % 360;
+    if (screen.orientation && typeof screen.orientation.angle === 'number') return ((screen.orientation.angle % 360) + 360) % 360;
+    if (typeof window.orientation === 'number') return ((window.orientation % 360) + 360) % 360;
+    return innerWidth > innerHeight ? 90 : 0;
   }
   function update() {
     var a = angle(), phone = Math.min(screen.width, screen.height) < 600 && matchMedia('(pointer: coarse)').matches;
     var on = phone && (a === 90 || a === 270);
-    d.classList.toggle('rot', on);
-    d.classList.toggle('rot-l', on && a === 90);   // phone turned counter-clockwise (top edge on the left)
-    d.classList.toggle('rot-r', on && a === 270);  // phone turned clockwise (top edge on the right)
-    if (on) { d.style.setProperty('--pw', innerHeight + 'px'); d.style.setProperty('--ph', innerWidth + 'px'); }
-    else { d.style.removeProperty('--pw'); d.style.removeProperty('--ph'); }
+    if (on !== d.classList.contains('landscape')) {
+      d.classList.toggle('landscape', on);
+      if (on && document.activeElement && document.activeElement.blur) document.activeElement.blur(); // close the keyboard
+    }
   }
   update();
   addEventListener('resize', update);
   addEventListener('orientationchange', function () { update(); setTimeout(update, 120); });
   if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener('change', update);
   try { screen.orientation.lock('portrait').catch(function () {}); } catch (e) {} // works where the browser allows it
-  /* Screen (client) coordinates → the app's own portrait coordinates. */
-  window.localPt = function (x, y) {
-    if (!d.classList.contains('rot')) return [x, y];
-    return d.classList.contains('rot-l') ? [innerHeight - y, x] : [y, innerWidth - x];
-  };
-  /* Top-left corner of an element's box, in portrait coordinates. */
-  window.localOrigin = function (r) {
-    var ps = [[r.left, r.top], [r.right, r.top], [r.left, r.bottom], [r.right, r.bottom]].map(function (p) { return localPt(p[0], p[1]); });
-    return [Math.min.apply(null, ps.map(function (p) { return p[0]; })), Math.min.apply(null, ps.map(function (p) { return p[1]; }))];
-  };
+  /* Pointer coordinates are plain screen coordinates again (kept as helpers for the touch code). */
+  window.localPt = function (x, y) { return [x, y]; };
+  window.localOrigin = function (r) { return [r.left, r.top]; };
 })();
 </script>
-<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2026.10.30.5">
+<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2026.10.30.6">
 <!-- Browser-tab favicon (static mint files; swapped to the user's theme color at runtime) -->
 <link id="favSvg" rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link id="favIcon" rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -72,17 +65,39 @@ try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r
     --pw: 100vw;   /* portrait width / height: the real viewport, or the swapped one while counter-rotated */
     --ph: 100dvh;
   }
-  /* Counter-rotation (see the portrait-lock script in <head>): body becomes a portrait-sized box turned
-     back upright; fixed-position layers (remote, sheets, dialogs, toasts) follow it. */
-  html.rot, html.rot body { overflow: hidden; }
-  html.rot body { position: fixed; top: 0; left: 0; width: var(--pw); height: var(--ph); transform-origin: 0 0; }
-  html.rot-l body { transform: translateY(var(--pw)) rotate(-90deg); }
-  html.rot-r body { transform: translateX(var(--ph)) rotate(90deg); }
-  html.rot-l { --safe-t: env(safe-area-inset-left, 0px); --safe-b: env(safe-area-inset-right, 0px); }
-  html.rot-r { --safe-t: env(safe-area-inset-right, 0px); --safe-b: env(safe-area-inset-left, 0px); }
-  html.rot .max-h-\[88dvh\] { max-height: calc(var(--ph) * .88); }
-  html.rot .ok-btn { font-size: clamp(18px, calc(var(--pw) * .055), 24px); }
-  html.rot #landing h1 { font-size: clamp(34px, calc(var(--pw) * .1), 46px); }
+  /* ===== Landscape gate: phones held sideways see only this ===== */
+  #rotateGate { position: fixed; inset: 0; z-index: 200; display: none; place-items: center; overflow: hidden; text-align: center;
+    background: radial-gradient(120% 90% at 50% 40%, rgb(var(--accent-rgb) / .16), transparent 60%), #08090d;
+    padding: max(env(safe-area-inset-top), 16px) max(env(safe-area-inset-right), 24px) max(env(safe-area-inset-bottom), 16px) max(env(safe-area-inset-left), 24px);
+    touch-action: none; }
+  html.landscape #rotateGate { display: grid; animation: gateIn .35s ease both; }
+  html.landscape body { overflow: hidden; }
+  html.landscape #app, html.landscape #landing, html.landscape .sheet { visibility: hidden; }
+  #rotateGate .gate-grid { position: absolute; inset: -20%; opacity: .5; pointer-events: none;
+    background-image: linear-gradient(rgb(255 255 255 / .04) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / .04) 1px, transparent 1px);
+    background-size: 44px 44px; -webkit-mask-image: radial-gradient(closest-side, #000, transparent); mask-image: radial-gradient(closest-side, #000, transparent);
+    animation: gateDrift 14s linear infinite; }
+  #rotateGate .gate-stage { position: relative; width: 132px; height: 132px; margin: 0 auto 18px; display: grid; place-items: center; }
+  #rotateGate .gate-ring { position: absolute; inset: 0; border-radius: 50%; border: 1.5px dashed rgb(var(--accent-rgb) / .45); animation: gateSpin 9s linear infinite; }
+  #rotateGate .gate-ring::after { content: ''; position: absolute; inset: 14px; border-radius: 50%; border: 1px solid rgb(var(--accent-rgb) / .18);
+    box-shadow: 0 0 40px rgb(var(--accent-rgb) / .25), inset 0 0 30px rgb(var(--accent-rgb) / .12); }
+  #rotateGate .gate-phone { position: relative; width: 46px; height: 82px; border-radius: 12px; border: 2.5px solid #f2f3f7;
+    box-shadow: 0 0 22px rgb(var(--accent-rgb) / .55); animation: gateTurn 2.6s cubic-bezier(.65,0,.35,1) infinite; }
+  #rotateGate .gate-phone::before { content: ''; position: absolute; top: 6px; left: 50%; width: 14px; height: 3px; margin-left: -7px; border-radius: 3px; background: #f2f3f7; opacity: .8; }
+  #rotateGate .gate-phone::after { content: ''; position: absolute; inset: 14px 7px; border-radius: 4px; background: linear-gradient(160deg, rgb(var(--accent-rgb) / .9), rgb(var(--accent-rgb) / .25)); }
+  #rotateGate .gate-arrow { position: absolute; width: 132px; height: 132px; color: rgb(var(--accent-rgb)); animation: gateArrow 2.6s ease-in-out infinite; }
+  #rotateGate h2 { font-size: 22px; font-weight: 600; letter-spacing: -.01em; color: #fff; }
+  #rotateGate p { margin-top: 6px; font-size: 13.5px; line-height: 1.5; color: #8b8d98; max-width: 300px; margin-inline: auto; }
+  #rotateGate .gate-tag { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 10px; padding: 4px 10px; border-radius: 999px; font-size: 10.5px;
+    font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / .1); border: 1px solid rgb(var(--accent-rgb) / .25); }
+  #rotateGate .gate-tag i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; animation: gatePulse 1.4s ease-in-out infinite; }
+  @keyframes gateIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes gateSpin { to { transform: rotate(360deg); } }
+  @keyframes gateDrift { to { transform: translate(44px, 44px); } }
+  @keyframes gatePulse { 50% { opacity: .35; } }
+  @keyframes gateTurn { 0%, 18% { transform: rotate(-90deg); } 55%, 100% { transform: rotate(0deg); } }
+  @keyframes gateArrow { 0%, 15% { opacity: 0; transform: rotate(-40deg); } 40% { opacity: 1; } 60%, 100% { opacity: 0; transform: rotate(10deg); } }
+  @media (prefers-reduced-motion: reduce) { #rotateGate *, #rotateGate .gate-grid { animation: none !important; } #rotateGate .gate-arrow { opacity: 1; } }
   html, body { height: 100%; background: #0d0e14; }
   body {
     -webkit-tap-highlight-color: transparent;
@@ -268,6 +283,22 @@ try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r
 <label id="hapLbl" class="hap" for="hapSw" aria-hidden="true"><input id="hapSw" type="checkbox" switch tabindex="-1"></label>
 
 <!-- ============ Splash ============ -->
+<!-- Shown instead of the app while a phone is held sideways -->
+<div id="rotateGate" role="alertdialog" aria-live="assertive" aria-labelledby="gateTitle" aria-describedby="gateText">
+  <div class="gate-grid"></div>
+  <div>
+    <div class="gate-stage" aria-hidden="true">
+      <div class="gate-ring"></div>
+      <svg class="gate-arrow" viewBox="0 0 132 132" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M30 34a50 50 0 0 1 58-14"/><path d="M84 12l6 9-10 4"/>
+      </svg>
+      <div class="gate-phone"></div>
+    </div>
+    <div class="gate-tag"><i></i>Portrait only</div>
+    <h2 id="gateTitle">Turn your phone upright</h2>
+    <p id="gateText">MATi works in portrait. Rotate back to keep using your remote.</p>
+  </div>
+</div>
 <div id="splash" aria-hidden="true">
   <div class="flex flex-col items-center">
     <div class="splash-stage"><span class="splash-ring"></span><span class="splash-ring"></span><span class="splash-ring"></span><div class="splash-logo" data-logo></div></div>
@@ -2058,7 +2089,7 @@ document.addEventListener('visibilitychange', () => {
    whenever you come back to the app, and every 15 minutes; if it's newer, it reloads itself.
    The service worker also always asks GitHub for fresh files first and only falls back to the
    saved copy when you're offline. */
-const BUILD = '2026.10.30.5';
+const BUILD = '2026.10.30.6';
 let swReg = null, updating = false;
 async function checkForUpdate() {
   if (updating || !navigator.onLine) return;

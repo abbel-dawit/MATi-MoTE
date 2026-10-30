@@ -6,7 +6,7 @@
  * - VERSION is stamped automatically by build.sh (and must change with each release so old
  *   caches are cleared).
  */
-const VERSION = 'mati-2026.10.30.5';
+const VERSION = 'mati-2026.10.30.6';
 const SHELL = [
   './',
   './index.html',
