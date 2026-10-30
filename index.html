@@ -13,10 +13,10 @@
 <meta name="apple-mobile-web-app-title" content="MATi">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
-<link rel="manifest" href="manifest.json?v=2026.10.30.2">
+<link rel="manifest" href="manifest.json?v=2026.10.30.4">
 <script>/* apply the saved theme before first paint so the splash is already in the user's colour */
 try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r = document.documentElement.style; r.setProperty('--accent-rgb', v[0]); r.setProperty('--accent-ink', v[1]); r.setProperty('--ok-ink', v[2]); } } catch (e) {}</script>
-<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2026.10.30.2">
+<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2026.10.30.4">
 <!-- Browser-tab favicon (static mint files; swapped to the user's theme color at runtime) -->
 <link id="favSvg" rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link id="favIcon" rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -50,15 +50,22 @@ try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r
     position: fixed; inset: 0; display: flex; flex-direction: column; gap: var(--gap);
     background: #0d0e14; overflow: hidden;
     padding: calc(max(var(--safe-t), 10px) + 4px) 0 max(var(--safe-b), 14px);
-    --k: clamp(42px, 6.3dvh, 56px);          /* round keys */
+    --k: clamp(50px, 7.5dvh, 68px);          /* round keys */
     --gap: clamp(8px, 1.7dvh, 18px);         /* vertical rhythm */
-    --pill: clamp(112px, 17.5dvh, 158px);    /* volume / channel rockers */
-    --pillw: clamp(54px, 15vw, 64px);
-    --bar: clamp(48px, 6.8dvh, 58px);        /* App bar */
+    --pill: clamp(132px, 20.5dvh, 186px);    /* volume / channel rockers */
+    --pillw: clamp(62px, 18vw, 76px);
+    --bar: clamp(56px, 8dvh, 70px);          /* App bar */
     --dpad: min(80vw, 320px, 37dvh);
   }
   #app > * { width: 100%; max-width: 480px; margin-inline: auto; }
   #app .k { width: var(--k); height: var(--k); }
+  #app .k > [data-icon], #app .pill [data-icon] { width: 24px; height: 24px; }
+  #app .pill > button { width: 52px; height: 52px; }
+  #app .pill > span:not([data-icon]) { font-size: 17px; }
+  #devicePill { height: 48px; font-size: 15px; }
+  #modeDpad, #modePad { width: 40px; height: 40px; }
+  #modeDpad > span, #modePad > span { width: 20px; height: 20px; }
+  #appsBtn { font-size: 17px; }
   .row3 { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; }
   .cluster { display: grid; grid-template-columns: var(--pillw) 1fr var(--pillw); align-items: center; gap: 12px; }
   .cluster .pill { height: var(--pill); }
@@ -576,9 +583,18 @@ function haptic() {
    app goes to the background. So: unlock and re-unlock on every finished tap, and if a click
    arrives while audio is still locked, hold it and play it the instant the unlock lands.
    'ambient' session = follows the iPhone silent switch like the system keyboard clicks do. */
-let actx = null, pendingSound = null, noiseBuf = null;
+let actx = null, pendingSound = null, sfxBus = null;
 try { if (navigator.audioSession) navigator.audioSession.type = 'ambient'; } catch {}
-const TONES = { key: 900, ok: 560, power: 320, type: 1500, del: 720, app: 660 };
+/* Each sound: notes (Hz) played in quick succession, a level, and a length. Pure sine "glass" blips
+   tuned to one chord (C major pentatonic) so every button sounds like part of the same instrument. */
+const TONES = {
+  key:   { notes: [1046.5],          gain: 0.20, len: 0.09 },  // C6 — soft tick for most buttons
+  ok:    { notes: [784, 1174.7],     gain: 0.22, len: 0.10 },  // G5 → D6 — confirm
+  power: { notes: [784, 523.25],     gain: 0.22, len: 0.14 },  // G5 → C5 — powering down
+  type:  { notes: [1568],            gain: 0.10, len: 0.05 },  // G6 — keyboard, very light
+  del:   { notes: [880],             gain: 0.12, len: 0.06 },  // A5
+  app:   { notes: [659.25, 987.77, 1318.5], gain: 0.20, len: 0.16 }, // E5 → B5 → E6 — launch shimmer
+};
 function audioCtx() {
   if (actx) return actx;
   const C = window.AudioContext || window.webkitAudioContext;
@@ -605,24 +621,46 @@ function clickSound(kind = 'key') {
   c.resume().then(flushPending).catch(() => {});
   setTimeout(() => { if (pendingSound === kind) pendingSound = null; }, 400); // never play a stale click late
 }
+/* Output chain shared by all sounds: gentle low-pass (no harsh highs) → a short, quiet echo for a
+   sense of space → limiter so fast repeats never get loud. */
+function sfxOut(c) {
+  if (sfxBus && sfxBus.context === c) return sfxBus;
+  const input = c.createGain();
+  const lp = c.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 5200; lp.Q.value = 0.5;
+  const comp = c.createDynamicsCompressor(); comp.threshold.value = -18; comp.knee.value = 12; comp.ratio.value = 6; comp.attack.value = 0.002; comp.release.value = 0.08;
+  const delay = c.createDelay(0.5); delay.delayTime.value = 0.075;
+  const fb = c.createGain(); fb.gain.value = 0.22;
+  const wet = c.createGain(); wet.gain.value = 0.18;
+  const damp = c.createBiquadFilter(); damp.type = 'lowpass'; damp.frequency.value = 2600;
+  input.connect(lp); lp.connect(comp);
+  lp.connect(delay); delay.connect(damp); damp.connect(fb); fb.connect(delay); damp.connect(wet); wet.connect(comp);
+  comp.connect(c.destination);
+  sfxBus = input;
+  return input;
+}
+/* One "glass" note: a sine with a tiny downward pitch settle (feels tactile), plus a quiet octave
+   partial that fades faster, giving a clean, bright-but-soft futuristic blip. */
+function blip(c, out, f, t, len, gain) {
+  const g = c.createGain();
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(gain, t + 0.004);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+  g.connect(out);
+  const o = c.createOscillator(); o.type = 'sine';
+  o.frequency.setValueAtTime(f * 1.06, t); o.frequency.exponentialRampToValueAtTime(f, t + 0.018);
+  o.connect(g); o.start(t); o.stop(t + len + 0.02);
+  const h = c.createOscillator(), hg = c.createGain(); h.type = 'sine';
+  h.frequency.setValueAtTime(f * 2, t);
+  hg.gain.setValueAtTime(0.0001, t);
+  hg.gain.exponentialRampToValueAtTime(gain * 0.22, t + 0.003);
+  hg.gain.exponentialRampToValueAtTime(0.0001, t + len * 0.45);
+  h.connect(hg).connect(out); h.start(t); h.stop(t + len);
+}
 function playClick(kind) {
   try {
-    const c = actx, t = c.currentTime + 0.002, f = TONES[kind] || TONES.key;
-    if (!noiseBuf) {                          // short decaying noise burst = the "tick"
-      noiseBuf = c.createBuffer(1, Math.ceil(c.sampleRate * 0.03), c.sampleRate);
-      const d = noiseBuf.getChannelData(0);
-      for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 4);
-    }
-    const n = c.createBufferSource(); n.buffer = noiseBuf;
-    const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = f * 2.4; bp.Q.value = 1.4;
-    const ng = c.createGain(); ng.gain.value = kind === 'type' ? 0.55 : 0.8;
-    n.connect(bp).connect(ng).connect(c.destination); n.start(t);
-    const o = c.createOscillator(), og = c.createGain();   // small pitched body so it isn't just hiss
-    o.type = 'sine'; o.frequency.setValueAtTime(f, t); o.frequency.exponentialRampToValueAtTime(f * 0.6, t + 0.05);
-    og.gain.setValueAtTime(0.0001, t);
-    og.gain.exponentialRampToValueAtTime(kind === 'type' ? 0.14 : 0.26, t + 0.004);
-    og.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
-    o.connect(og).connect(c.destination); o.start(t); o.stop(t + 0.07);
+    const c = actx, t = c.currentTime + 0.002, s = TONES[kind] || TONES.key, out = sfxOut(c);
+    const step = s.notes.length > 2 ? 0.042 : 0.05;
+    s.notes.forEach((f, i) => blip(c, out, f, t + i * step, s.len, s.gain * (i ? 0.85 : 1)));
   } catch {}
 }
 function feedback(kind) { haptic(); clickSound(kind); }
@@ -635,14 +673,28 @@ function feedback(kind) { haptic(); clickSound(kind); }
    ===================================================================== */
 
 /* Streaming apps. To show official logos, drop each service's logo file at icons/apps/<key>.png
-   (e.g. icons/apps/netflix.png, taken from that company's press/brand kit). Missing files fall back to a glyph. */
+   (e.g. icons/apps/netflix.png, taken from that company's press/brand kit). Missing files fall back to a glyph.
+   ids: known app IDs per platform, most common first. Netflix, Prime Video and Disney+ use different IDs on
+   different Samsung model years / regions, so Samsung and LG drivers first ask the TV which apps it has and
+   match by ID or by name (match), and only fall back to this list if the TV won't say. */
 const APPS = [
-  { key: 'netflix', name: 'Netflix',     cat: 'Movies & TV', glyph: 'film',  c1: '#43090f', c2: '#120509', glow: '#e50914', ids: { roku: '12',     samsung: '3201907018807', lg: 'netflix' } },
-  { key: 'youtube', name: 'YouTube',     cat: 'Video',           glyph: 'play',  c1: '#3f0b0b', c2: '#140606', glow: '#ff2d2d', ids: { roku: '837',    samsung: '111299001912',  lg: 'youtube.leanback.v4' } },
-  { key: 'prime',   name: 'Prime Video', cat: 'Movies & TV', glyph: 'film',  c1: '#06294a', c2: '#06101c', glow: '#1fa2ff', ids: { roku: '13',     samsung: '3201910019365', lg: 'amazon' } },
-  { key: 'disney',  name: 'Disney+',     cat: 'Movies & TV', glyph: 'star',  c1: '#14205c', c2: '#070a1f', glow: '#4f6dff', ids: { roku: '291097', samsung: '3201901017640', lg: 'com.disney.disneyplus-prod' } },
-  { key: 'spotify', name: 'Spotify',     cat: 'Music', glyph: 'music', c1: '#07431f', c2: '#04130a', glow: '#1ed760', ids: { roku: '22297',  samsung: '3201606009684', lg: 'spotify-beehive' } },
+  { key: 'netflix', name: 'Netflix',     cat: 'Movies & TV', glyph: 'film',  c1: '#43090f', c2: '#120509', glow: '#e50914', match: /netflix/i,
+    ids: { roku: '12',     samsung: ['3201907018807', '11101200001'],   lg: ['netflix'] } },
+  { key: 'youtube', name: 'YouTube',     cat: 'Video',       glyph: 'play',  c1: '#3f0b0b', c2: '#140606', glow: '#ff2d2d', match: /^youtube$/i,
+    ids: { roku: '837',    samsung: ['111299001912'],                   lg: ['youtube.leanback.v4'] } },
+  { key: 'prime',   name: 'Prime Video', cat: 'Movies & TV', glyph: 'film',  c1: '#06294a', c2: '#06101c', glow: '#1fa2ff', match: /prime\s*video|amazon/i,
+    ids: { roku: '13',     samsung: ['3201910019365', '3201512006785'], lg: ['amazon', 'com.amazon.amazonvideo.webos'] } },
+  { key: 'disney',  name: 'Disney+',     cat: 'Movies & TV', glyph: 'star',  c1: '#14205c', c2: '#070a1f', glow: '#4f6dff', match: /disney/i,
+    ids: { roku: '291097', samsung: ['3201901017640'],                  lg: ['com.disney.disneyplus-prod'] } },
+  { key: 'spotify', name: 'Spotify',     cat: 'Music',       glyph: 'music', c1: '#07431f', c2: '#04130a', glow: '#1ed760', match: /^spotify/i,
+    ids: { roku: '22297',  samsung: ['3201606009684'],                  lg: ['spotify-beehive'] } },
 ];
+/* Pick the TV's own entry for an app: exact known ID first, then by name. */
+function findInstalled(list, app, platform, idOf, nameOf) {
+  if (!Array.isArray(list)) return null;
+  const known = app.ids[platform] || [];
+  return list.find((x) => known.includes(idOf(x))) || list.find((x) => app.match.test(String(nameOf(x) || '').trim())) || null;
+}
 const GLYPHS = {
   film:  P('<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.3v5.4l4.6-2.7z" fill="currentColor"/>'),
   play:  P('<path d="M7 5v14l12-7z" fill="currentColor" stroke-width="1.4"/>'),
@@ -699,7 +751,7 @@ class RokuDriver extends BaseDriver {
     catch { this.setStatus('error', 'Command failed — Roku unreachable.'); throw new Error('roku'); }
   }
   async send(k) { const key = RokuDriver.KEYS[k]; if (key) await this.post(`keypress/${key}`); }
-  async launch(appKey) { const id = APPS.find((a) => a.key === appKey)?.ids.roku; if (id) { await this.post(`launch/${id}`); } }
+  async launch(appKey) { const id = APPS.find((a) => a.key === appKey)?.ids.roku; if (id) { await this.post(`launch/${id}`); } } // Roku channel IDs are global
   inputs() { return [['InputTuner', 'Live TV'], ['InputHDMI1', 'HDMI 1'], ['InputHDMI2', 'HDMI 2'], ['InputHDMI3', 'HDMI 3'], ['InputHDMI4', 'HDMI 4'], ['InputAV1', 'AV']]; }
   async selectInput(code) { await this.post(`keypress/${code}`); }
 }
@@ -715,6 +767,7 @@ class SamsungDriver extends BaseDriver {
     const name = btoa('MATi-MoTE');
     const token = this.device.token ? `&token=${encodeURIComponent(this.device.token)}` : '';
     const url = `wss://${this.device.ip}:8002/api/v2/channels/samsung.remote.control?name=${name}${token}`;
+    this.listeners = new Set(); this.apps = null; this.appsReq = null; this.noAppList = false; this.noConfirm = false;
     this.setStatus('connecting', 'Connecting… approve “MATi-MoTE” on the TV if asked.');
     return new Promise((resolve) => {
       let opened = false;
@@ -723,10 +776,12 @@ class SamsungDriver extends BaseDriver {
       this.ws.onopen = () => { opened = true; this.tlsOk = true; this.onTls?.(); };
       this.ws.onmessage = (ev) => {
         let m; try { m = JSON.parse(ev.data); } catch { return; }
+        this.listeners.forEach((fn) => fn(m));
         if (m.event === 'ms.channel.connect') {
           clearTimeout(fail);
           if (m.data?.token) { this.device.token = m.data.token; save(); }
           this.setStatus('online', 'Connected'); resolve();
+          this.loadApps().catch(() => {}); // learn this TV's real app IDs in the background
         } else if (m.event === 'ms.channel.unauthorized') {
           clearTimeout(fail); this.setStatus('error', 'Access denied on the TV. Allow it under Settings › General › External Device Manager › Device Connection Manager.'); resolve();
         } else if (m.event === 'ms.channel.timeOut') {
@@ -747,9 +802,65 @@ class SamsungDriver extends BaseDriver {
     if (!key) return;
     this.raw({ method: 'ms.remote.control', params: { Cmd: 'Click', DataOfCmd: key, Option: 'false', TypeOfRemote: 'SendRemoteKey' } });
   }
+  /* Wait for the next message matching `test`, or null after `ms`. */
+  waitFor(test, ms) {
+    return new Promise((resolve) => {
+      const fn = (m) => { if (test(m)) { done(m); } };
+      const done = (m) => { clearTimeout(t); this.listeners?.delete(fn); resolve(m); };
+      const t = setTimeout(() => done(null), ms);
+      this.listeners?.add(fn);
+    });
+  }
+  /* The TV's installed apps: [{ appId, app_type, name }]. app_type 2 = web/widget app (DEEP_LINK),
+     4 = native app (NATIVE_LAUNCH). Netflix and Prime Video are native on many models. */
+  loadApps() {
+    if (this.apps || this.noAppList) return Promise.resolve(this.apps);
+    if (!this.appsReq) {
+      const wait = this.waitFor((m) => m.event === 'ed.installedApp.get', 4000);
+      try { this.raw({ method: 'ms.channel.emit', params: { event: 'ed.installedApp.get', to: 'host' } }); } catch { this.appsReq = null; return Promise.resolve(null); }
+      this.appsReq = wait.then((m) => {
+        const list = m?.data?.data || m?.data;
+        this.apps = Array.isArray(list) ? list : null;
+        if (!this.apps) { this.appsReq = null; if (!m) this.noAppList = true; } // firmware without the app list: don't ask again
+        return this.apps;
+      });
+    }
+    return this.appsReq;
+  }
+  /* Send one launch and read the TV's answer: 'ok', 'fail', or 'unknown' (older firmware doesn't answer). */
+  async emitLaunch(appId, actionType) {
+    const wait = this.waitFor((m) => m.event === 'ed.apps.launch' || m.event === 'ms.error', 3000);
+    this.raw({ method: 'ms.channel.emit', params: { event: 'ed.apps.launch', to: 'host', data: { appId, action_type: actionType } } });
+    const m = await wait;
+    if (!m) return 'unknown';
+    return m.event === 'ed.apps.launch' && (m.data === 200 || m.data === '200' || m.data === true) ? 'ok' : 'fail';
+  }
+  /* Same launch through the TV's REST API (works on firmware where the WebSocket launch is ignored). */
+  restLaunch(appId) {
+    return lanFetch(`https://${this.device.ip}:8002/api/v2/applications/${appId}`, { method: 'POST', timeout: 3000 }).catch(() => {});
+  }
   async launch(appKey) {
-    const id = APPS.find((a) => a.key === appKey)?.ids.samsung; if (!id) return;
-    this.raw({ method: 'ms.channel.emit', params: { event: 'ed.apps.launch', to: 'host', data: { appId: id, action_type: 'DEEP_LINK' } } });
+    const app = APPS.find((a) => a.key === appKey); if (!app) return;
+    const apps = await this.loadApps().catch(() => null);
+    let tries;
+    if (apps) {
+      const hit = findInstalled(apps, app, 'samsung', (x) => x.appId, (x) => x.name);
+      if (!hit) { toast(`${esc(app.name)} isn’t installed on this TV.`); throw new Error('not-installed'); }
+      const first = hit.app_type === 4 ? 'NATIVE_LAUNCH' : 'DEEP_LINK';
+      tries = [[hit.appId, first], [hit.appId, first === 'DEEP_LINK' ? 'NATIVE_LAUNCH' : 'DEEP_LINK']];
+    } else {
+      tries = app.ids.samsung.flatMap((id) => [[id, 'DEEP_LINK'], [id, 'NATIVE_LAUNCH']]);
+    }
+    let i = 0;
+    for (; i < tries.length && !this.noConfirm; i++) {
+      const r = await this.emitLaunch(...tries[i]);
+      if (r === 'ok') return;
+      if (r === 'unknown') { this.noConfirm = true; i++; break; } // this firmware doesn't confirm launches
+    }
+    // No confirmation from the TV: send the remaining candidates without waiting (IDs that aren't
+    // installed are ignored by the TV), then the same IDs over the REST API as a last resort.
+    for (; i < tries.length; i++) { try { this.raw({ method: 'ms.channel.emit', params: { event: 'ed.apps.launch', to: 'host', data: { appId: tries[i][0], action_type: tries[i][1] } } }); } catch {} }
+    for (const id of new Set(tries.map((t) => t[0]))) await this.restLaunch(id);
   }
   close() { try { this.ws && this.ws.close(); } catch {} this.ws = null; }
 }
@@ -764,7 +875,7 @@ class LGDriver extends BaseDriver {
   trustUrl() { return `https://${this.device.ip}:3001/`; }
   connect() {
     this.close();
-    this.seq = 0; this.pending = new Map(); this.playing = true;
+    this.seq = 0; this.pending = new Map(); this.playing = true; this.apps = null;
     this.setStatus('connecting', 'Connecting… accept the pairing prompt on the TV.');
     return new Promise((resolve) => {
       let opened = false;
@@ -831,7 +942,29 @@ class LGDriver extends BaseDriver {
   }
   pointer(dx, dy) { this.ptrSend(`type:move\ndx:${Math.round(dx)}\ndy:${Math.round(dy)}\ndown:0\n\n`); }
   click() { if (!this.ptrSend('type:click\n\n')) return this.send('ok'); }
-  async launch(appKey) { const id = APPS.find((a) => a.key === appKey)?.ids.lg; if (id) { await this.request('ssap://system.launcher/launch', { id }); } }
+  /* The TV's launcher entries: [{ id, title }] — used to find the real ID of each app on this model. */
+  async loadApps() {
+    if (this.apps) return this.apps;
+    const res = await this.request('ssap://com.webos.applicationManager/listLaunchPoints');
+    this.apps = Array.isArray(res?.launchPoints) ? res.launchPoints : null;
+    return this.apps;
+  }
+  async launch(appKey) {
+    const app = APPS.find((a) => a.key === appKey); if (!app) return;
+    const apps = await this.loadApps().catch(() => null);
+    const hit = findInstalled(apps, app, 'lg', (x) => x.id, (x) => x.title);
+    if (apps && !hit) { toast(`${esc(app.name)} isn’t installed on this TV.`); throw new Error('not-installed'); }
+    const ids = hit ? [hit.id] : app.ids.lg;
+    let lastErr;
+    for (const id of ids) {
+      try {
+        const res = await this.request('ssap://system.launcher/launch', { id });
+        if (res?.returnValue === false) throw new Error(res.errorText || 'launch refused');
+        return;
+      } catch (e) { lastErr = e; }
+    }
+    throw lastErr || new Error('lg-launch');
+  }
   close() { try { this.ws && this.ws.close(); } catch {} try { this.ptr && this.ptr.close(); } catch {} this.ws = this.ptr = null; }
 }
 
@@ -1876,7 +2009,7 @@ document.addEventListener('visibilitychange', () => {
    whenever you come back to the app, and every 15 minutes; if it's newer, it reloads itself.
    The service worker also always asks GitHub for fresh files first and only falls back to the
    saved copy when you're offline. */
-const BUILD = '2026.10.30.2';
+const BUILD = '2026.10.30.4';
 let swReg = null, updating = false;
 async function checkForUpdate() {
   if (updating || !navigator.onLine) return;

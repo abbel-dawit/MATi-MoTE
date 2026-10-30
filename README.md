@@ -104,6 +104,6 @@ TAILWIND=./tailwindcss-macos-arm64 ./build.sh   # standalone CLI from the Tailwi
 ```
 
 ## Notes
-- App IDs for launching are in the `APPS` array in `index.html`; IDs can differ by region or model.
+- App IDs for launching are in the `APPS` array in `index.html`. On Samsung and LG, MATi first asks the TV for its installed apps and matches by ID or name (Netflix, Prime Video and Disney+ use different IDs across Samsung model years and regions, and some are native apps that need a different launch type); the listed IDs are only a fallback.
 - LG pairing sends an unsigned manifest. Most webOS versions accept it.
 - Remotes and the Spotify sign-in are stored in the browser's `localStorage` on that phone only.
