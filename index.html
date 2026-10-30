@@ -13,10 +13,45 @@
 <meta name="apple-mobile-web-app-title" content="MATi">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
-<link rel="manifest" href="manifest.json?v=2026.10.30.4">
+<link rel="manifest" href="manifest.json?v=2026.10.30.5">
 <script>/* apply the saved theme before first paint so the splash is already in the user's colour */
 try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r = document.documentElement.style; r.setProperty('--accent-rgb', v[0]); r.setProperty('--accent-ink', v[1]); r.setProperty('--ok-ink', v[2]); } } catch (e) {}</script>
-<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2026.10.30.4">
+<script>/* Portrait lock. Installed Android apps are locked by manifest.json; everywhere else (iPhone,
+   browser tabs) the OS still rotates the page, so when a phone turns sideways we turn the whole app
+   back the other way. It then stays exactly as it looks in portrait, fixed to the phone. */
+(function () {
+  var d = document.documentElement;
+  function angle() {
+    var a = screen.orientation && typeof screen.orientation.angle === 'number' ? screen.orientation.angle : (window.orientation || 0);
+    return ((a % 360) + 360) % 360;
+  }
+  function update() {
+    var a = angle(), phone = Math.min(screen.width, screen.height) < 600 && matchMedia('(pointer: coarse)').matches;
+    var on = phone && (a === 90 || a === 270);
+    d.classList.toggle('rot', on);
+    d.classList.toggle('rot-l', on && a === 90);   // phone turned counter-clockwise (top edge on the left)
+    d.classList.toggle('rot-r', on && a === 270);  // phone turned clockwise (top edge on the right)
+    if (on) { d.style.setProperty('--pw', innerHeight + 'px'); d.style.setProperty('--ph', innerWidth + 'px'); }
+    else { d.style.removeProperty('--pw'); d.style.removeProperty('--ph'); }
+  }
+  update();
+  addEventListener('resize', update);
+  addEventListener('orientationchange', function () { update(); setTimeout(update, 120); });
+  if (screen.orientation && screen.orientation.addEventListener) screen.orientation.addEventListener('change', update);
+  try { screen.orientation.lock('portrait').catch(function () {}); } catch (e) {} // works where the browser allows it
+  /* Screen (client) coordinates → the app's own portrait coordinates. */
+  window.localPt = function (x, y) {
+    if (!d.classList.contains('rot')) return [x, y];
+    return d.classList.contains('rot-l') ? [innerHeight - y, x] : [y, innerWidth - x];
+  };
+  /* Top-left corner of an element's box, in portrait coordinates. */
+  window.localOrigin = function (r) {
+    var ps = [[r.left, r.top], [r.right, r.top], [r.left, r.bottom], [r.right, r.bottom]].map(function (p) { return localPt(p[0], p[1]); });
+    return [Math.min.apply(null, ps.map(function (p) { return p[0]; })), Math.min.apply(null, ps.map(function (p) { return p[1]; }))];
+  };
+})();
+</script>
+<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2026.10.30.5">
 <!-- Browser-tab favicon (static mint files; swapped to the user's theme color at runtime) -->
 <link id="favSvg" rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link id="favIcon" rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -34,7 +69,20 @@ try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r
     --ok-ink: #0b8a60;
     --safe-t: env(safe-area-inset-top, 0px);
     --safe-b: env(safe-area-inset-bottom, 0px);
+    --pw: 100vw;   /* portrait width / height: the real viewport, or the swapped one while counter-rotated */
+    --ph: 100dvh;
   }
+  /* Counter-rotation (see the portrait-lock script in <head>): body becomes a portrait-sized box turned
+     back upright; fixed-position layers (remote, sheets, dialogs, toasts) follow it. */
+  html.rot, html.rot body { overflow: hidden; }
+  html.rot body { position: fixed; top: 0; left: 0; width: var(--pw); height: var(--ph); transform-origin: 0 0; }
+  html.rot-l body { transform: translateY(var(--pw)) rotate(-90deg); }
+  html.rot-r body { transform: translateX(var(--ph)) rotate(90deg); }
+  html.rot-l { --safe-t: env(safe-area-inset-left, 0px); --safe-b: env(safe-area-inset-right, 0px); }
+  html.rot-r { --safe-t: env(safe-area-inset-right, 0px); --safe-b: env(safe-area-inset-left, 0px); }
+  html.rot .max-h-\[88dvh\] { max-height: calc(var(--ph) * .88); }
+  html.rot .ok-btn { font-size: clamp(18px, calc(var(--pw) * .055), 24px); }
+  html.rot #landing h1 { font-size: clamp(34px, calc(var(--pw) * .1), 46px); }
   html, body { height: 100%; background: #0d0e14; }
   body {
     -webkit-tap-highlight-color: transparent;
@@ -50,12 +98,12 @@ try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r
     position: fixed; inset: 0; display: flex; flex-direction: column; gap: var(--gap);
     background: #0d0e14; overflow: hidden;
     padding: calc(max(var(--safe-t), 10px) + 4px) 0 max(var(--safe-b), 14px);
-    --k: clamp(50px, 7.5dvh, 68px);          /* round keys */
-    --gap: clamp(8px, 1.7dvh, 18px);         /* vertical rhythm */
-    --pill: clamp(132px, 20.5dvh, 186px);    /* volume / channel rockers */
-    --pillw: clamp(62px, 18vw, 76px);
-    --bar: clamp(56px, 8dvh, 70px);          /* App bar */
-    --dpad: min(80vw, 320px, 37dvh);
+    --k: clamp(50px, calc(var(--ph) * 0.075), 68px);          /* round keys */
+    --gap: clamp(8px, calc(var(--ph) * 0.017), 18px);         /* vertical rhythm */
+    --pill: clamp(132px, calc(var(--ph) * 0.205), 186px);    /* volume / channel rockers */
+    --pillw: clamp(62px, calc(var(--pw) * 0.18), 76px);
+    --bar: clamp(56px, calc(var(--ph) * 0.08), 70px);          /* App bar */
+    --dpad: min(calc(var(--pw) * 0.8), 320px, calc(var(--ph) * 0.37));
   }
   #app > * { width: 100%; max-width: 480px; margin-inline: auto; }
   #app .k { width: var(--k); height: var(--k); }
@@ -73,21 +121,21 @@ try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r
   .quad { display: grid; grid-template-columns: repeat(2, var(--k)); grid-template-rows: repeat(2, var(--k));
     justify-content: space-evenly; align-content: space-evenly; height: var(--pill); }
   #dpad { width: var(--dpad); }
-  #touchpad { width: min(84vw, 330px, 39dvh); }
+  #touchpad { width: min(calc(var(--pw) * 0.84), 330px, calc(var(--ph) * 0.39)); }
   .appbar { height: var(--bar); }
   /* desktop browsers: show the remote as a phone-sized card on the tiled backdrop */
   @media (min-width: 640px) and (min-height: 720px) and (hover: hover) {
     body { background-color: #2a2a2e;
       background-image: linear-gradient(rgba(0,0,0,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.35) 1px, transparent 1px);
       background-size: 76px 76px; }
-    #app { position: relative; inset: auto; width: 440px; height: min(900px, calc(100dvh - 48px)); margin: 24px auto;
+    #app { position: relative; inset: auto; width: 440px; height: min(900px, calc(calc(var(--ph) * 1) - 48px)); margin: 24px auto;
       border-radius: 44px; box-shadow: 0 30px 80px rgba(0,0,0,.6); outline: 1px solid rgba(255,255,255,.08); padding: 22px 0 22px; }
   }
 
   /* ===== Centred dialog ===== */
   .modal { opacity: 0; pointer-events: none; transition: opacity .2s ease; }
   .modal.open { opacity: 1; pointer-events: auto; }
-  .modal-card { transform: scale(.94) translateY(8px); transition: transform .25s cubic-bezier(.2,.9,.3,1.2); max-height: 86dvh; overflow-y: auto; }
+  .modal-card { transform: scale(.94) translateY(8px); transition: transform .25s cubic-bezier(.2,.9,.3,1.2); max-height: calc(var(--ph) * 0.86); overflow-y: auto; }
   .modal.open .modal-card { transform: none; }
 
   .key {
@@ -175,7 +223,7 @@ try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r
   .ghost.g2 { right: -30px; top: 30%; transform: rotate(16deg); animation: bob 8s ease-in-out -2s infinite; }
   .ghost.g3 { left: 8%; bottom: 7%; transform: rotate(24deg) scale(.8); animation: bob 9s ease-in-out -4s infinite; opacity: .35; }
   @keyframes bob { 50% { translate: 0 -14px; } }
-  .hero-logo { width: min(52vw, 230px, 30dvh); aspect-ratio: 1; translate: calc(var(--px, 0) * 14px) calc(var(--py, 0) * 14px);
+  .hero-logo { width: min(calc(var(--pw) * 0.52), 230px, calc(var(--ph) * 0.3)); aspect-ratio: 1; translate: calc(var(--px, 0) * 14px) calc(var(--py, 0) * 14px);
     transition: translate .25s ease-out; filter: drop-shadow(0 30px 50px rgb(var(--accent-rgb) / .35)); }
   .hero-logo svg { animation: float 6s ease-in-out infinite; }
   @keyframes float { 50% { transform: translateY(-10px) rotate(2deg); } }
@@ -1393,7 +1441,7 @@ function bindKeys() {
 function bindTouchpad() {
   const pad = $('#touchpad'), dot = $('#padDot');
   let sx, sy, lx, ly, t0, moved, longT, longFired;
-  const pos = (e) => { const r = pad.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+  const pos = (e) => { const [ox, oy] = localOrigin(pad.getBoundingClientRect()), [x, y] = localPt(e.clientX, e.clientY); return [x - ox, y - oy]; };
   pad.addEventListener('pointerdown', (e) => {
     pad.setPointerCapture(e.pointerId);
     [sx, sy] = pos(e); [lx, ly] = [sx, sy]; t0 = Date.now(); moved = false; longFired = false;
@@ -1480,13 +1528,13 @@ $('#scrim').addEventListener('click', closeSheet);
   sheet.addEventListener('touchstart', (e) => {
     if (!sheetOpen || e.touches.length !== 1) return;
     if (e.target.closest('input, select, textarea')) { mode = 'scroll'; return; }
-    startY = lastY = e.touches[0].clientY; lastT = e.timeStamp; vel = 0;
+    startY = lastY = localPt(e.touches[0].clientX, e.touches[0].clientY)[1]; lastT = e.timeStamp; vel = 0;
     const onHeader = !!e.target.closest('#sheetHead');
     mode = onHeader || sheet.scrollTop <= 0 ? 'maybe' : 'scroll';
   }, { passive: true });
   sheet.addEventListener('touchmove', (e) => {
     if (!mode || mode === 'scroll') return;
-    const y = e.touches[0].clientY, dt = Math.max(1, e.timeStamp - lastT);
+    const y = localPt(e.touches[0].clientX, e.touches[0].clientY)[1], dt = Math.max(1, e.timeStamp - lastT);
     vel = (y - lastY) / dt; lastY = y; lastT = e.timeStamp;
     const d = y - startY;
     if (mode === 'maybe') {
@@ -1978,8 +2026,9 @@ $('#startBtn').addEventListener('click', () => {
 // Parallax on the landing hero (finger / mouse, plus device tilt where allowed without a prompt)
 $('#landing').addEventListener('pointermove', (e) => {
   const l = $('#landing');
-  l.style.setProperty('--px', ((e.clientX / innerWidth) - .5) * 2);
-  l.style.setProperty('--py', ((e.clientY / innerHeight) - .5) * 2);
+  const [x, y] = localPt(e.clientX, e.clientY), w = l.offsetWidth || innerWidth, h = l.offsetHeight || innerHeight;
+  l.style.setProperty('--px', ((x / w) - .5) * 2);
+  l.style.setProperty('--py', ((y / h) - .5) * 2);
 });
 if (!IS_IOS) window.addEventListener('deviceorientation', (e) => {
   if (e.gamma == null || $('#landing').classList.contains('gone')) return;
@@ -2009,7 +2058,7 @@ document.addEventListener('visibilitychange', () => {
    whenever you come back to the app, and every 15 minutes; if it's newer, it reloads itself.
    The service worker also always asks GitHub for fresh files first and only falls back to the
    saved copy when you're offline. */
-const BUILD = '2026.10.30.4';
+const BUILD = '2026.10.30.5';
 let swReg = null, updating = false;
 async function checkForUpdate() {
   if (updating || !navigator.onLine) return;
