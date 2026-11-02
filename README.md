@@ -91,8 +91,9 @@ Limits from Spotify, not MATi:
 - **Troubleshooting popup** after ~12 s unreachable or 3 failed presses (Wi-Fi → IP → certificate / Spotify checks).
 - **Certificate trust with auto-return** (Android closes the certificate page itself; on iPhone, swipe back and it reconnects).
 - **Button sounds** (on/off in Settings). They follow the iPhone silent switch, like the system keyboard clicks.
+- **Vibration haptics** (Settings › Feel), on/off separately from Sound: use both, or turn Sound off and keep just the vibration. Each kind of button has its own pattern (tap, firmer OK, double pulse for Power, a short rhythm for app launch, lighter ticks on press-and-hold) and a **Light / Medium / Strong** strength. Android uses the phone's vibration motor; iPhone (iOS 18+) gets the system tap, since Safari has no vibration API.
 - Buttons a device can't use are dimmed (e.g. channel keys on a speaker).
-- **Unlimited remotes**, **9 theme colors** (default Mint), haptics, touchpad mode (real pointer on LG), press-and-hold repeat.
+- **Unlimited remotes**, **9 theme colors** (default Mint), touchpad mode (real pointer on LG), press-and-hold repeat.
 
 ## Changing styles
 Tailwind is compiled into `index.html` so the app works offline without a CDN. After changing classes:

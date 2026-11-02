@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="MATi">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="format-detection" content="telephone=no">
-<link rel="manifest" href="manifest.json?v=2026.10.31.1">
+<link rel="manifest" href="manifest.json?v=2026.11.02.1">
 <script>/* apply the saved theme before first paint so the splash is already in the user's colour */
 try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r = document.documentElement.style; r.setProperty('--accent-rgb', v[0]); r.setProperty('--accent-ink', v[1]); r.setProperty('--ok-ink', v[2]); } } catch (e) {}</script>
 <script>/* Portrait only. Installed Android apps are locked by manifest.json; everywhere else (iPhone,
@@ -43,7 +43,7 @@ try { var v = JSON.parse(localStorage.getItem('mati.themeVars')); if (v) { var r
   window.localOrigin = function (r) { return [r.left, r.top]; };
 })();
 </script>
-<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2026.10.31.1">
+<link id="appleIcon" rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2026.11.02.1">
 <!-- Browser-tab favicon (static mint files; swapped to the user's theme color at runtime) -->
 <link id="favSvg" rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link id="favIcon" rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -627,7 +627,7 @@ const state = {
   devices: store.get('mati.devices', []),
   activeId: store.get('mati.active', null),
   theme: store.get('mati.theme', 'mint'),
-  settings: Object.assign({ haptics: true, sound: true, mode: 'dpad' }, store.get('mati.settings', {})),
+  settings: Object.assign({ haptics: true, hapticStrength: 'medium', sound: true, mode: 'dpad' }, store.get('mati.settings', {})),
   driver: null,
 };
 const save = () => {
@@ -657,10 +657,42 @@ function toast(msg, ms = 2600) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.remove('show'), ms);
 }
-function haptic() {
+/* Vibration haptics. Independent of Sound: either, both or neither can be on (Settings › Feel).
+   Android / Chrome / Firefox: real vibration motor via navigator.vibrate, with a pattern per kind of
+   button (the same kinds as the click sounds) scaled by the chosen strength. Very short pulses
+   (< ~12 ms) don't spin up the motor on many Android phones, so every pulse has a floor.
+   iPhone (iOS 18+): Safari has no vibrate API; the hidden switch trick fires the system "tick",
+   and multi-pulse kinds tick twice. Older iPhones have no web haptics at all. */
+const HAS_VIBRATE = typeof navigator.vibrate === 'function';
+const IOS_VER = IS_IOS ? parseFloat((UA.match(/OS (\d+)[_.](\d+)/) || [, '0', '0']).slice(1).join('.')) : 0;
+const CAN_HAPTIC = HAS_VIBRATE || (IS_IOS && IOS_VER >= 18);
+/* Patterns in ms: [vibrate, pause, vibrate, …] at Medium strength. */
+const BUZZ = {
+  key:    [22],                    // most buttons
+  ok:     [32],                    // OK / select — a little firmer
+  power:  [38, 70, 55],            // two pulses, second heavier
+  app:    [22, 55, 22, 55, 40],    // launch "da-da-dum"
+  repeat: [14],                    // press-and-hold repeats — light so it doesn't drone
+  ui:     [16],                    // settings, mode switches, theme swatches
+  type:   [12],
+  del:    [16],
+  error:  [45, 60, 45],            // something didn't work
+};
+const STRENGTH = { light: 0.6, medium: 1, strong: 1.7 };
+function haptic(kind = 'ui') {
   if (!state.settings.haptics) return;
-  if (navigator.vibrate) { navigator.vibrate(8); return; }
-  if (IS_IOS) { try { $('#hapLbl').click(); } catch {} }
+  const pat = BUZZ[kind] || BUZZ.key;
+  if (HAS_VIBRATE) {
+    const m = STRENGTH[state.settings.hapticStrength] || 1;
+    const scaled = pat.map((ms, i) => (i % 2 ? ms : Math.max(12, Math.round(ms * m))));
+    try { navigator.vibrate(scaled); } catch {}
+    return;
+  }
+  if (IS_IOS) {
+    const tick = () => { try { $('#hapLbl').click(); } catch {} };
+    tick();
+    if (pat.length > 1) setTimeout(tick, 90);
+  }
 }
 /* Button sounds: a short synthesized click (no audio files). Toggle in Settings › Sound.
    Why it sometimes went silent before: iPhone Safari only lets audio start from a finished tap
@@ -748,7 +780,8 @@ function playClick(kind) {
     s.notes.forEach((f, i) => blip(c, out, f, t + i * step, s.len, s.gain * (i ? 0.85 : 1)));
   } catch {}
 }
-function feedback(kind) { haptic(); clickSound(kind); }
+/* One call per button press: vibration and sound are each gated by their own setting. */
+function feedback(kind, opts = {}) { haptic(opts.repeat ? 'repeat' : kind); clickSound(kind); }
 
 /* =====================================================================
    DRIVERS — one per TV platform. Each exposes:
@@ -1417,13 +1450,13 @@ function trustPassed(dev) {
 }
 function stopTrust() { clearTimeout(trust.timer); Object.assign(trust, { active: false, devId: null, win: null, timer: null }); }
 
-async function press(key) {
-  feedback(key === 'ok' ? 'ok' : key === 'power' ? 'power' : 'key');
+async function press(key, opts = {}) {
+  feedback(key === 'ok' ? 'ok' : key === 'power' ? 'power' : 'key', opts);
   const dev = activeDevice();
   if (!dev) { openDevices(); return; }
   const drv = state.driver;
   if (!drv) return;
-  if (!drv.supports(key)) { toast(`Not available on ${esc(BRANDS[dev.brand].name)}`); return; }
+  if (!drv.supports(key)) { if (!opts.repeat) haptic('error'); toast(`Not available on ${esc(BRANDS[dev.brand].name)}`); return; }
   if (key === 'input' && drv.inputs && drv.inputs()) { openInputs(); return; }
   try { await drv.send(key); }
   catch { if (++failCount >= 3 && !troubleDismissed.has(dev.id)) openTroubleshoot(dev); }
@@ -1466,7 +1499,7 @@ function bindKeys() {
       e.preventDefault();
       el.classList.add('pressed');
       press(key);
-      if (repeat) t1 = setTimeout(() => (t2 = setInterval(() => press(key), 140)), 420);
+      if (repeat) t1 = setTimeout(() => (t2 = setInterval(() => press(key, { repeat: true }), 140)), 420);
     });
     ['pointerup', 'pointerleave', 'pointercancel'].forEach((ev) => el.addEventListener(ev, stop));
     el.addEventListener('click', (e) => { if (e.detail === 0) press(key); }); // keyboard activation
@@ -1501,9 +1534,8 @@ function bindTouchpad() {
   const end = () => {
     clearTimeout(longT);
     if (t0 != null && !moved && !longFired && Date.now() - t0 < 450) {
-      haptic();
       const isLG = activeDevice()?.brand === 'lg' && state.driver?.status === 'online';
-      isLG ? state.driver.click() : press('ok');
+      if (isLG) { feedback('ok'); state.driver.click(); } else press('ok'); // press() gives its own feedback
     }
     t0 = null; dot.style.opacity = 0;
   };
@@ -1924,7 +1956,7 @@ function openApps() {
   const grid = $('#appGrid');
   grid.querySelectorAll('[data-app]').forEach((card) => card.addEventListener('click', async () => {
     if (card.classList.contains('launching')) return;
-    haptic();
+    haptic('app');
     const a = APPS.find((x) => x.key === card.dataset.app);
     const lbl = card.querySelector('.lbl');
     card.classList.add('launching');
@@ -1935,6 +1967,7 @@ function openApps() {
       lbl.textContent = 'Opened ✓';
       setTimeout(closeSheet, 650);
     } catch {
+      haptic('error');
       lbl.textContent = 'Retry';
     } finally {
       setTimeout(() => card.classList.remove('launching'), 700);
@@ -1945,7 +1978,7 @@ function openInputs() {
   const list = state.driver.inputs();
   openSheet('Input', `<div class="grid grid-cols-2 gap-2 pb-2">${list.map(([code, label]) => `<button data-in="${code}" ${btn('bg-white/5')}>${label}</button>`).join('')}</div>`, 'inputs');
   $('#sheetBody').querySelectorAll('[data-in]').forEach((b) => b.addEventListener('click', async () => {
-    haptic(); try { await state.driver.selectInput(b.dataset.in); closeSheet(); } catch {}
+    haptic('ok'); try { await state.driver.selectInput(b.dataset.in); closeSheet(); } catch {}
   }));
 }
 
@@ -1969,6 +2002,14 @@ function openSettings() {
         <span class="absolute left-1 top-1 h-5 w-5 rounded-full bg-white shadow-[0_1px_3px_rgba(0,0,0,.4)] transition-transform peer-checked:translate-x-5"></span>
       </span>
     </label>`;
+  const hapticNote = HAS_VIBRATE ? 'Buzz when you press a button'
+    : IS_IOS && IOS_VER >= 18 ? 'Light tap when you press a button'
+    : IS_IOS ? 'Needs iOS 18 or later on iPhone'
+    : 'This browser can’t vibrate';
+  const strengthBtns = [['light', 'Light'], ['medium', 'Medium'], ['strong', 'Strong']].map(([k, l]) => {
+    const on = (state.settings.hapticStrength || 'medium') === k;
+    return `<button data-strength="${k}" role="radio" aria-checked="${on}" class="rounded-full px-3 py-1.5 text-[12px] font-medium transition-colors ${on ? 'bg-accent text-ink' : 'bg-transparent text-white'}">${l}</button>`;
+  }).join('');
   const install = IS_STANDALONE ? '<p class="text-[13px] text-emerald-300">Installed — you’re running MATi as an app.</p>'
     : IS_IOS ? `<p class="flex items-start gap-2 text-[13px] leading-5 text-zinc-300"><span class="mt-0.5 h-4 w-4 shrink-0" data-icon="share"></span>In Safari, tap Share, then <b>Add to Home Screen</b>.</p>`
     : `<button id="installBtn" ${btn('w-full bg-white/5')}><span class="h-4 w-4" data-icon="download"></span>Install MATi</button>`;
@@ -1980,8 +2021,13 @@ function openSettings() {
       </section>
       <section class="space-y-2">
         <h3 class="mb-1 text-[12px] font-medium uppercase tracking-wider text-muted">Feel</h3>
-        ${toggle('hapticsTg', state.settings.haptics, 'Haptics', 'Tap feedback (Android, iOS 18+)')}
+        ${toggle('hapticsTg', state.settings.haptics, 'Vibration', hapticNote)}
+        <div id="strengthRow" class="${state.settings.haptics && HAS_VIBRATE ? '' : 'hidden'} flex items-center justify-between gap-4 rounded-2xl bg-white/[.03] px-4 py-3">
+          <span class="block text-[14px]">Strength</span>
+          <div id="strengthSeg" role="radiogroup" aria-label="Vibration strength" class="flex gap-1 rounded-full bg-white/5 p-1">${strengthBtns}</div>
+        </div>
         ${toggle('soundTg', state.settings.sound, 'Sound', 'Click sound when you press a button')}
+        <p class="px-1 text-[12px] leading-5 text-muted">Use both together, or turn Sound off and keep just the vibration.</p>
       </section>
       <section class="space-y-2">
         <h3 class="mb-1 text-[12px] font-medium uppercase tracking-wider text-muted">Remotes</h3>
@@ -1999,7 +2045,21 @@ function openSettings() {
     const b = e.target.closest('[data-theme]'); if (!b) return;
     state.theme = b.dataset.theme; save(); applyTheme(state.theme); haptic(); openSettings();
   });
-  $('#hapticsTg').addEventListener('change', (e) => { state.settings.haptics = e.target.checked; save(); });
+  $('#hapticsTg').addEventListener('change', (e) => {
+    state.settings.haptics = e.target.checked; save();
+    $('#strengthRow').classList.toggle('hidden', !(e.target.checked && HAS_VIBRATE));
+    if (e.target.checked) haptic('ok'); // let them feel it right away
+  });
+  $('#strengthSeg').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-strength]'); if (!b) return;
+    state.settings.hapticStrength = b.dataset.strength; save();
+    $('#strengthSeg').querySelectorAll('[data-strength]').forEach((x) => {
+      const on = x === b;
+      x.setAttribute('aria-checked', on);
+      x.className = `rounded-full px-3 py-1.5 text-[12px] font-medium transition-colors ${on ? 'bg-accent text-ink' : 'bg-transparent text-white'}`;
+    });
+    haptic('power'); // a two-pulse sample so the difference is easy to feel
+  });
   $('#soundTg').addEventListener('change', (e) => { state.settings.sound = e.target.checked; save(); if (e.target.checked) clickSound('ok'); });
   $('#manageBtn').addEventListener('click', openDevices);
   $('#installBtn')?.addEventListener('click', async () => {
@@ -2095,7 +2155,7 @@ document.addEventListener('visibilitychange', () => {
    whenever you come back to the app, and every 15 minutes; if it's newer, it reloads itself.
    The service worker also always asks GitHub for fresh files first and only falls back to the
    saved copy when you're offline. */
-const BUILD = '2026.10.31.1';
+const BUILD = '2026.11.02.1';
 let swReg = null, updating = false;
 async function checkForUpdate() {
   if (updating || !navigator.onLine) return;
